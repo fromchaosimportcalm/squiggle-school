@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Squiggle School — Printable fun for curious kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:        #f8f5ef;
+  --cream-warm:   #f2ece0;
+  --cream-deep:   #e8e0d0;
+  --forest:       #2d4a3e;
+  --forest-mid:   #3a5c4f;
+  --forest-light: #4e7a6a;
+  --accent:       #E9A857;
+  --accent-dark:  #c8883a;
+  --accent-pale:  #fdf0dc;
+  --ink:          #2E3A4A;
+  --ink-soft:     #4a5568;
+  --ink-mute:     #718096;
+  --font-body:    'Crimson Pro', Georgia, serif;
+  --font-mono:    'DM Mono', monospace;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--ink); min-height: 100vh; font-size: 17px; }
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+.app-header {
+  background: var(--forest);
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 3px solid var(--accent);
+}
+.header-brand { display: flex; flex-direction: column; gap: 2px; }
+.app-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.app-title em { color: var(--accent); font-style: italic; }
+.app-subtitle { font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.65); }
+.header-controls { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.name-input-wrap { display: flex; align-items: center; gap: 6px; }
+.name-input-wrap label { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+.name-input {
+  font-family: var(--font-body); font-size: 0.95rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px; color: #fff; padding: 5px 10px; width: 140px;
+  outline: none;
+}
+.name-input::placeholder { color: rgba(255,255,255,0.3); }
+.name-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.15); }
+.diff-wrap { display: flex; align-items: center; gap: 6px; }
+.diff-wrap label { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+.diff-select {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px; color: #fff; padding: 5px 8px; cursor: pointer; outline: none;
+}
+.diff-select option { background: var(--forest); }
+
+/* ── Layout ──────────────────────────────────────────────────────────────────── */
+.app-body { display: flex; gap: 1.5rem; padding: 1.5rem 2rem; align-items: flex-start; max-width: 1120px; margin: 0 auto; }
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────────── */
+.sidebar { width: 195px; flex-shrink: 0; position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 3px; }
+.sidebar-label {
+  font-family: var(--font-mono); font-size: 0.55rem; color: var(--ink-mute);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.6rem 0.5rem 0.15rem; opacity: 0.6;
+}
+.sidebar-btn {
+  font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-soft);
+  background: white; border: 1px solid var(--cream-deep); border-radius: 7px;
+  padding: 0.5rem 0.75rem; cursor: pointer; text-align: left;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  line-height: 1.3;
+}
+.sidebar-btn:hover { background: var(--cream-warm); border-color: var(--accent); }
+.sidebar-btn.active { background: var(--accent); color: #fff; border-color: var(--accent-dark); font-weight: 500; }
+
+/* ── Main ────────────────────────────────────────────────────────────────────── */
+.main { flex: 1; min-width: 0; }
+.toolbar {
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; flex-wrap: wrap;
+}
+.btn {
+  font-family: var(--font-body); font-size: 1rem; padding: 0.5rem 1.1rem;
+  border-radius: 8px; border: 1.5px solid var(--cream-deep); cursor: pointer;
+  transition: background 0.12s, transform 0.08s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-secondary { background: white; color: var(--ink-soft); }
+.btn-secondary:hover { background: var(--cream-warm); border-color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--ink-mute); border-color: var(--cream-deep); font-size: 0.9rem; }
+.btn-ghost:hover { background: var(--cream-warm); color: var(--ink-soft); }
+.toolbar-sep { width: 1px; height: 28px; background: var(--cream-deep); margin: 0 2px; }
+
+/* ── Worksheet ───────────────────────────────────────────────────────────────── */
+.worksheet {
+  background: white; width: 706px; max-width: 100%;
+  min-height: 997px; border: 1px solid var(--cream-deep);
+  border-radius: 4px; padding: 44px 48px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+}
+
+/* ── Worksheet internals ─────────────────────────────────────────────────────── */
+.ws-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 14px;
+}
+.ws-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+.ws-meta { font-family: var(--font-mono); font-size: 0.55rem; color: #bbb; letter-spacing: 0.06em; }
+.ws-fields { display: flex; gap: 2rem; margin-bottom: 20px; }
+.ws-field { display: flex; align-items: baseline; gap: 0.4rem; flex: 1; }
+.ws-field-label { font-family: var(--font-mono); font-size: 0.6rem; color: #999; letter-spacing: 0.1em; white-space: nowrap; }
+.ws-field-line { flex: 1; border-bottom: 1px solid #ccc; height: 1.4rem; }
+.ws-section {
+  font-family: var(--font-mono); font-size: 0.62rem; color: #aaa;
+  letter-spacing: 0.08em; text-transform: uppercase; margin: 18px 0 7px;
+}
+.ws-tip {
+  font-family: var(--font-body); font-size: 0.9rem; color: #bbb;
+  font-style: italic; margin: 5px 0 12px;
+}
+.ws-prompt {
+  background: var(--accent-pale); border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0; padding: 6px 12px; margin: 0 0 14px;
+  font-family: var(--font-body); font-size: 0.9rem; color: var(--accent-dark);
+}
+
+/* Tracing */
+.trace-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.trace-char {
+  font-family: Arial, Helvetica, sans-serif; font-size: 58px; font-weight: 700;
+  color: transparent; -webkit-text-stroke: 1.5px #ddd;
+  display: flex; align-items: center; justify-content: center;
+  width: 72px; height: 72px; border: 1px solid #f0f0f0; border-radius: 4px; line-height: 1;
+}
+.write-box { border: 1px solid #e8e8e8; border-radius: 4px; width: 100%; height: 64px; position: relative; }
+.write-box-label { font-family: var(--font-mono); font-size: 0.55rem; color: #ccc; letter-spacing: 0.1em; position: absolute; top: 5px; left: 8px; }
+.number-strip { display: flex; gap: 4px; margin: 6px 0 14px; flex-wrap: wrap; }
+.strip-cell {
+  width: 42px; height: 42px; border: 1px solid #e0e0e0; border-radius: 4px;
+  font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+}
+.strip-blank { border: 1.5px dashed #d8d8d8; }
+.count-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.count-emoji-group { display: flex; flex-wrap: wrap; gap: 3px; width: 140px; min-height: 38px; align-items: center; align-content: center; }
+.count-write-box { width: 44px; height: 44px; border: 1.5px dashed #ccc; border-radius: 6px; flex-shrink: 0; }
+.match-number {
+  font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; color: var(--ink);
+  width: 42px; height: 42px; border: 1px solid #ddd; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.match-dot-group { width: 42px; height: 42px; border: 1px solid #ddd; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pattern-row { display: flex; align-items: center; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
+.pattern-cell { font-size: 26px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #f0f0f0; }
+.pattern-blank { border: 1.5px dashed #ccc; background: #fafafa; font-size: 0; }
+.draw-box { border: 1px solid #e8e8e8; border-radius: 6px; width: 100%; height: 110px; }
+
+/* New components */
+.squiggle-canvas { border: 1.5px dashed #d8d0bc; border-radius: 6px; width: 100%; display: block; background: white; }
+.squiggle-prompt { font-family: var(--font-body); font-size: 1.05rem; color: #bbb; font-style: italic; text-align: center; margin: 6px 0 14px; }
+.dice-row { display: flex; gap: 10px; margin: 8px 0 14px; flex-wrap: wrap; }
+.dice-face { width: 64px; height: 64px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 34px; display: flex; align-items: center; justify-content: center; background: #fafafa; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+.face-grid { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.face-card { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.face-circle { width: 90px; height: 90px; border-radius: 50%; border: 1.5px solid #ddd; background: white; position: relative; overflow: hidden; }
+.face-label { font-family: var(--font-mono); font-size: 0.6rem; color: #aaa; letter-spacing: 0.1em; text-transform: uppercase; }
+.cbs-grid { display: flex; flex-wrap: wrap; gap: 3px; margin: 8px 0 14px; }
+.cbs-cell { width: 48px; height: 48px; border: 1px solid #e8e8e8; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: white; }
+.cbs-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 12px; }
+.cbs-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.7rem; color: #666; }
+.cbs-swatch { width: 18px; height: 18px; border-radius: 3px; border: 1px solid #ddd; }
+.map-canvas { border: 1.5px solid #e0e0e0; border-radius: 6px; display: block; background: #f8f9fb; }
+.creature-canvas { border: 1.5px dashed #d8d0bc; border-radius: 6px; display: block; background: white; }
+.comic-strip { display: flex; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
+.comic-panel { flex: 1; border-right: 2px solid var(--ink); display: flex; flex-direction: column; }
+.comic-panel:last-child { border-right: none; }
+.comic-draw-area { flex: 1; min-height: 160px; background: white; }
+.comic-caption { border-top: 2px solid var(--ink); padding: 5px 7px; font-family: var(--font-body); font-size: 0.85rem; color: #555; line-height: 1.4; min-height: 40px; background: #fafafa; }
+.scramble-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.scramble-emoji { font-size: 28px; flex-shrink: 0; }
+.scramble-letters { display: flex; gap: 4px; }
+.scramble-letter { width: 32px; height: 38px; border: 1.5px solid var(--ink); border-radius: 6px; font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; justify-content: center; background: var(--cream); }
+.scramble-answer { display: flex; gap: 4px; }
+.scramble-blank { width: 32px; height: 38px; border-bottom: 2px solid var(--ink); background: transparent; }
+.story-problem { border: 1px solid #e8e8e8; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; background: white; }
+.story-text { font-family: var(--font-body); font-size: 1rem; color: var(--ink); line-height: 1.6; margin-bottom: 10px; }
+.story-work-box { border: 1px dashed #ccc; border-radius: 6px; height: 64px; display: flex; align-items: flex-end; padding: 6px 10px; }
+.story-answer-label { font-family: var(--font-mono); font-size: 0.6rem; color: #bbb; letter-spacing: 0.1em; }
+.story-answer-line { border-bottom: 1.5px solid #ccc; width: 80px; margin-left: 8px; }
+
+/* Daily sheet */
+.daily-section { border: 1px solid var(--cream-deep); border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; }
+.daily-section-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+/* Print */
+@media print {
+  .app-header, .sidebar, .toolbar { display: none !important; }
+  .app-body { padding: 0; display: block; }
+  .worksheet { box-shadow: none; border: none; width: 100%; padding: 20px 28px; min-height: auto; }
+  body { background: white; }
+}
+@media (max-width: 900px) {
+  .app-body { flex-direction: column; padding: 1rem; }
+  .sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; position: static; gap: 4px; }
+  .sidebar-label { width: 100%; margin-top: 6px; }
+  .worksheet { width: 100%; padding: 24px 20px; }
+  .header-controls { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-brand">
+    <div class="app-title">Squiggle <em>School</em></div>
+    <div class="app-subtitle">Printable fun for curious kids</div>
+  </div>
+  <div class="header-controls">
+    <div class="name-input-wrap">
+      <label for="childName">Child's name</label>
+      <input class="name-input" id="childName" type="text" placeholder="e.g. Maddie" oninput="generate()">
+    </div>
+    <div class="diff-wrap">
+      <label for="difficulty">Level</label>
+      <select class="diff-select" id="difficulty" onchange="generate()">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="tricky">Tricky</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<div class="app-body">
+  <nav class="sidebar">
+    <div class="sidebar-label">Preschool</div>
+    <button class="sidebar-btn active" onclick="selectActivity(0)">✏️ Warm-Up Lines</button>
+    <button class="sidebar-btn" onclick="selectActivity(1)">🔤 Letter Tracing</button>
+    <button class="sidebar-btn" onclick="selectActivity(2)">🔢 Number Practice</button>
+    <button class="sidebar-btn" onclick="selectActivity(3)">🎯 Number Match-Up</button>
+    <button class="sidebar-btn" onclick="selectActivity(4)">🔷 Pattern Play</button>
+    <button class="sidebar-btn" onclick="selectActivity(5)">😊 Draw the Feelings</button>
+    <button class="sidebar-btn" onclick="selectActivity(6)">🎨 Colour Code</button>
+    <button class="sidebar-btn" onclick="selectActivity(7)">〰️ Squiggle Time</button>
+    <div class="sidebar-label" style="margin-top:6px">Primary</div>
+    <button class="sidebar-btn" onclick="selectActivity(8)">🌀 Maze Missions</button>
+    <button class="sidebar-btn" onclick="selectActivity(9)">🗺️ Make a Map</button>
+    <button class="sidebar-btn" onclick="selectActivity(10)">🦎 Finish the Creature</button>
+    <button class="sidebar-btn" onclick="selectActivity(11)">🎬 Make a Comic</button>
+    <button class="sidebar-btn" onclick="selectActivity(12)">🎲 Story Starter Dice</button>
+    <button class="sidebar-btn" onclick="selectActivity(13)">🔀 Word Mix-Up</button>
+    <button class="sidebar-btn" onclick="selectActivity(14)">🧮 Maths Stories</button>
+    <div class="sidebar-label" style="margin-top:6px">Special</div>
+    <button class="sidebar-btn" onclick="selectActivity(15)">🗓️ Daily Sheet</button>
+  </nav>
+
+  <div class="main">
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="generate()">🎲 New Sheet</button>
+      <button class="btn btn-secondary" onclick="surpriseMe()">✨ Surprise Me</button>
+      <div class="toolbar-sep"></div>
+      <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
+    </div>
+    <div class="worksheet" id="worksheet"></div>
+  </div>
+</div>
+
+<script>
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function range(n){return Array.from({length:n},(_,i)=>i);}
+function childName(){return document.getElementById('childName').value.trim();}
+function difficulty(){return document.getElementById('difficulty').value;}
+
+const FUN_PROMPTS = [
+  '🙃 Try doing this upside down!',
+  '🤪 Can you make it even sillier?',
+  '🎨 What if you used your other hand?',
+  '🐢 Go as slowly as you can.',
+  '⚡ Speed round — can you do it twice as fast?',
+  '🔇 Try doing this in total silence.',
+  '👀 Do it with your eyes almost closed.',
+];
+
+function randomPrompt() {
+  return `<div class="ws-prompt">${pick(FUN_PROMPTS)}</div>`;
+}
+
+function wsHeader(title, emoji='') {
+  const date = new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
+  const name = childName();
+  const nameVal = name || '';
+  return `
+    <div class="ws-header">
+      <div class="ws-title">${emoji?emoji+' ':''}${title}</div>
+      <div class="ws-meta">Squiggle School · ${date}</div>
+    </div>
+    <div class="ws-fields">
+      <div class="ws-field">
+        <span class="ws-field-label">Name</span>
+        <div class="ws-field-line" style="display:flex;align-items:flex-end;padding-bottom:2px">
+          ${nameVal ? `<span style="font-family:'Crimson Pro',Georgia,serif;font-size:1rem;color:#2E3A4A">${nameVal}</span>` : ''}
+        </div>
+      </div>
+      <div class="ws-field" style="max-width:180px">
+        <span class="ws-field-label">Date</span>
+        <div class="ws-field-line"></div>
+      </div>
+    </div>`;
+}
+
+// ── 1. Warm-Up Lines ──────────────────────────────────────────────────────────
+const W = 610;
+function ruledSVG(pathD) {
+  const guide = pathD ? `<path d="${pathD}" stroke="#d4c4a0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,3"/>` : '';
+  return `<svg width="${W}" height="52" style="display:block;margin:3px 0" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="8" x2="${W}" y2="8" stroke="#ece8e0" stroke-width="0.75"/>
+    <line x1="0" y1="26" x2="${W}" y2="26" stroke="#e8d8a8" stroke-width="0.5" stroke-dasharray="3,6"/>
+    <line x1="0" y1="44" x2="${W}" y2="44" stroke="#d8d0bc" stroke-width="1"/>
+    ${guide}</svg>`;
+}
+function spiralPath(cx,cy,r0,r1,turns){
+  const steps=180;let d='';
+  for(let i=0;i<=steps;i++){const t=i/steps,a=-Math.PI/2+t*turns*2*Math.PI,r=r0-(r0-r1)*t;
+  d+=(i===0?`M`:`L`)+`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;}
+  return d;
+}
+function genPenGrip() {
+  const strokes=shuffle([
+    {label:'Horizontal lines',path:`M0,14 L${W},14 M0,26 L${W},26 M0,38 L${W},38`},
+    {label:'Waves',path:(()=>{let d='M0,26';for(let x=0;x<W;x+=36)d+=` Q${x+9},8 ${x+18},26 Q${x+27},44 ${x+36},26`;return d;})()},
+    {label:'Zig-zags',path:(()=>{let d='M0,44';for(let x=0;x<W;x+=28)d+=` L${x+14},8 L${x+28},44`;return d;})()},
+    {label:'Loops',path:(()=>{let d='M0,44';for(let x=0;x<W-22;x+=22)d+=` C${x+3},8 ${x+19},8 ${x+22},44`;return d;})()},
+    {label:'Spirals',path:[100,305,510].map(cx=>spiralPath(cx,26,22,4,2.5)).join(' ')},
+  ]);
+  return `<p class="ws-tip">Trace the guide line, then fill the rows below.</p>${randomPrompt()}`
+    +strokes.map(s=>`<div class="ws-section">${s.label}</div>${ruledSVG(s.path)}${ruledSVG(null)}${ruledSVG(null)}`).join('');
+}
+
+// ── 2. Letter Tracing ─────────────────────────────────────────────────────────
+function genTraceLetters() {
+  const name = childName();
+  const upper=shuffle([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']).slice(0,12);
+  const lower=shuffle([...'abcdefghijklmnopqrstuvwxyz']).slice(0,12);
+  const row=chars=>chars.map(c=>`<div class="trace-char">${c}</div>`).join('');
+  return `<p class="ws-tip">Trace over each letter carefully, then try writing it yourself.</p>${randomPrompt()}
+    <div class="ws-section">Uppercase — trace each letter</div>
+    <div class="trace-grid">${row(upper)}</div>
+    <div class="ws-section">Lowercase — trace each letter</div>
+    <div class="trace-grid">${row(lower)}</div>
+    <div class="ws-section">Practise writing your name${name?' — can you write it three times?':''}</div>
+    <div class="write-box" style="height:80px"><span class="write-box-label">${name||'YOUR NAME'}</span></div>`;
+}
+
+// ── 3. Number Practice ────────────────────────────────────────────────────────
+function genTraceNumbers() {
+  const diff=difficulty();
+  const maxCount=diff==='easy'?5:diff==='medium'?7:10;
+  const digits=shuffle(range(10));
+  const emojis=['🍎','🌟','🐱','🌷','🦋','🐸','⭐','🎈','🍊','🐝','🦆','🌈'];
+  const countNums=diff==='easy'?[1,2,3,4,5]:diff==='medium'?[1,2,3,4,5,6,7]:[1,2,3,4,5,6,7,8,9,10];
+  const counts=shuffle(countNums).slice(0,5);
+  const traceRow=digits.map(d=>`<div class="trace-char">${d}</div>`).join('');
+  const seqRow=range(maxCount).map(i=>`<div class="strip-cell">${i+1}</div>`).join('');
+  const blankRow=range(maxCount).map(()=>`<div class="strip-cell strip-blank"></div>`).join('');
+  const countRows=counts.map(n=>{const e=pick(emojis);const group=range(n).map(()=>`<span style="font-size:20px">${e}</span>`).join('');
+    return `<div class="count-row"><div class="count-emoji-group">${group}</div><span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#ccc">→</span><div class="count-write-box"></div></div>`;}).join('');
+  return `<p class="ws-tip">Trace the numbers, then count the pictures and write how many.</p>${randomPrompt()}
+    <div class="ws-section">Trace the numbers</div><div class="trace-grid">${traceRow}</div>
+    <div class="ws-section">Write 1 to ${maxCount} — copy the top row</div>
+    <div class="number-strip">${seqRow}</div><div class="number-strip">${blankRow}</div>
+    <div class="ws-section">Count and write the number</div>${countRows}`;
+}
+
+// ── 4. Number Match-Up ────────────────────────────────────────────────────────
+function dotSVG(n){
+  const pos={1:[[0,0]],2:[[-1,0],[1,0]],3:[[-1,-1],[0,0],[1,1]],4:[[-1,-1],[1,-1],[-1,1],[1,1]],5:[[-1,-1],[1,-1],[0,0],[-1,1],[1,1]],6:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1]],7:[[-1,-1],[0,-1],[1,-1],[0,0],[-1,1],[0,1],[1,1]],8:[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]}[n]||[[0,0]];
+  const sz=38,sp=9,cx=sz/2,cy=sz/2,r=3.5;
+  return `<svg width="${sz}" height="${sz}" xmlns="http://www.w3.org/2000/svg">${pos.map(([dx,dy])=>`<circle cx="${cx+dx*sp}" cy="${cy+dy*sp}" r="${r}" fill="#2E3A4A"/>`).join('')}</svg>`;
+}
+function genMatchNumbers(){
+  const diff=difficulty();const max=diff==='easy'?5:diff==='medium'?8:10;
+  const nums=shuffle(range(max).map(i=>i+1)),dots=shuffle([...nums]);
+  const leftItems=nums.map(n=>`<div class="match-number">${n}</div>`).join('');
+  const rightItems=dots.map(n=>`<div class="match-dot-group">${dotSVG(n)}</div>`).join('');
+  const stripCells=range(10).map(i=>{const n=i+1,show=n%2!==0;return `<div class="strip-cell${show?'':' strip-blank'}">${show?n:''}</div>`;}).join('');
+  return `<p class="ws-tip">Draw a line from each number to the group with that many dots.</p>${randomPrompt()}
+    <div class="ws-section">Match the number to its dots</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:20px">
+      <div style="display:flex;flex-direction:column;gap:8px">${leftItems}</div>
+      <div style="display:flex;flex-direction:column;gap:8px">${rightItems}</div>
+    </div>
+    <div class="ws-section">Fill in the missing numbers</div>
+    <div class="number-strip">${stripCells}</div>`;
+}
+
+// ── 5. Pattern Play ───────────────────────────────────────────────────────────
+function genFinishPattern(){
+  const pairs=shuffle([['🌟','🌙'],['🐱','🐶'],['🍎','🍊'],['🔴','🔵'],['🌸','🌻'],['🐸','🐰'],['⭐','💫'],['🦊','🐺']]);
+  const triples=shuffle([['🦁','🐘','🐧'],['🌹','🌷','🌼'],['🍓','🍋','🫐'],['🔴','🟡','🔵'],['🐢','🐠','🦜'],['🍕','🍔','🍟']]);
+  const rows=[
+    [...pairs[0],...pairs[0],null,null],
+    [...pairs[1],...pairs[1],null,null],
+    [...triples[0],...triples[0],null,null,null],
+    [...triples[1],...triples[1],null,null,null],
+  ];
+  const rowsHtml=rows.map(cells=>`<div class="pattern-row">${cells.map(c=>c?`<div class="pattern-cell">${c}</div>`:`<div class="pattern-cell pattern-blank"></div>`).join('')}</div>`).join('');
+  return `<p class="ws-tip">Look at the pattern, then draw or write what comes next in each blank box.</p>${randomPrompt()}
+    <div class="ws-section">What comes next? Fill in the blanks</div>${rowsHtml}
+    <div class="ws-section" style="margin-top:16px">Make your own pattern</div>
+    <div class="pattern-row">${range(8).map(()=>`<div class="pattern-cell pattern-blank"></div>`).join('')}</div>
+    <div class="ws-section" style="margin-top:12px">Draw your pattern below</div>
+    <div class="draw-box"></div>`;
+}
+
+// ── 6. Draw the Feelings ──────────────────────────────────────────────────────
+function genEmotionFaces(){
+  const emotions=shuffle([{label:'Happy',hint:'big smile'},{label:'Sad',hint:'frown'},{label:'Surprised',hint:'open mouth'},{label:'Angry',hint:'scrunched brows'},{label:'Sleepy',hint:'droopy eyes'},{label:'Excited',hint:'huge grin'},{label:'Worried',hint:'wavy mouth'},{label:'Silly',hint:'tongue out'}]).slice(0,6);
+  const faces=emotions.map(e=>`<div class="face-card"><div class="face-circle"><svg width="90" height="90" xmlns="http://www.w3.org/2000/svg"><circle cx="45" cy="45" r="30" fill="none" stroke="#e0e0e0" stroke-width="1.5"/><circle cx="34" cy="38" r="3.5" fill="#e8e8e8"/><circle cx="56" cy="38" r="3.5" fill="#e8e8e8"/></svg></div><div class="face-label">${e.label}</div><div style="font-family:'Crimson Pro',Georgia,serif;font-size:0.8rem;color:#ccc;font-style:italic">${e.hint}</div></div>`).join('');
+  const name=childName();
+  return `<p class="ws-tip">Draw the right expression on each face — eyes, mouth, eyebrows all help!</p>${randomPrompt()}
+    <div class="ws-section">Draw the expression on each face</div><div class="face-grid">${faces}</div>
+    <div class="ws-section" style="margin-top:12px">How does ${name||'this person'} feel today?</div>
+    <div style="display:flex;gap:20px;align-items:center;margin:8px 0 14px">
+      <div class="face-circle" style="width:110px;height:110px;flex-shrink:0"><svg width="110" height="110" xmlns="http://www.w3.org/2000/svg"><circle cx="55" cy="55" r="38" fill="none" stroke="#e0e0e0" stroke-width="1.5"/></svg></div>
+      <div><div class="ws-section" style="margin:0 0 6px">I feel…</div><div class="write-box" style="width:220px;height:44px"><span class="write-box-label">write the word</span></div></div>
+    </div>`;
+}
+
+// ── 7. Colour Code ────────────────────────────────────────────────────────────
+function genColourBySymbol(){
+  const palettes=shuffle([[{sym:'★',color:'Red',hex:'#e74c3c'},{sym:'●',color:'Blue',hex:'#3498db'},{sym:'▲',color:'Yellow',hex:'#f1c40f'},{sym:'■',color:'Green',hex:'#27ae60'}],[{sym:'♥',color:'Pink',hex:'#e91e8c'},{sym:'✦',color:'Purple',hex:'#9b59b6'},{sym:'◆',color:'Orange',hex:'#e67e22'},{sym:'✿',color:'Teal',hex:'#1abc9c'}],[{sym:'☀',color:'Gold',hex:'#f39c12'},{sym:'❄',color:'Blue',hex:'#2980b9'},{sym:'☁',color:'Grey',hex:'#95a5a6'},{sym:'♦',color:'Red',hex:'#c0392b'}]])[0];
+  const patterns=shuffle([[[null,null,'★','★','★','★',null,null],[null,'★','●','★','★','●','★',null],['★','★','★','★','★','★','★','★'],['★','▲',null,'▲','▲',null,'▲','★'],['★','★','■','★','★','■','★','★'],[null,'★','★','■','■','★','★',null],[null,null,'★','★','★','★',null,null],[null,null,null,null,null,null,null,null]],[[null,null,null,'▲','▲',null,null,null],[null,null,'▲','▲','▲','▲',null,null],[null,'▲','▲','▲','▲','▲','▲',null],['▲','★','★','★','★','★','★','▲'],['★','★','★','★','★','★','★','★'],['★','★','●','●','■','■','★','★'],['★','★','●','●','■','■','★','★'],['★','★','★','★','★','★','★','★']],[['●','●',null,null,null,null,'●','●'],['●','●','★',null,null,'★','●','●'],[null,'★','★','▲','▲','★','★',null],[null,null,'▲','▲','▲','▲',null,null],[null,null,'▲','▲','▲','▲',null,null],[null,'■','■','▲','▲','■','■',null],['■','■',null,null,null,null,'■','■'],['■',null,null,null,null,null,null,'■']]]);
+  const grid=patterns[Math.floor(Math.random()*patterns.length)];
+  const legend=palettes.map(p=>`<div class="cbs-legend-item"><div class="cbs-swatch" style="background:${p.hex}"></div><span style="font-size:1rem">${p.sym}</span><span>= ${p.color}</span></div>`).join('');
+  const cells=grid.map(row=>row.map(sym=>sym?`<div class="cbs-cell">${sym}</div>`:`<div class="cbs-cell" style="background:#f8f8f8;border-color:#f0f0f0"></div>`).join('')).join('');
+  return `<p class="ws-tip">Use the key to colour each box the right colour. What picture appears?</p>${randomPrompt()}
+    <div class="ws-section">Colour each box using the key</div>
+    <div class="cbs-legend">${legend}</div>
+    <div class="cbs-grid" style="width:${8*51}px">${cells}</div>
+    <div class="ws-section" style="margin-top:14px">Design your own colour code picture</div>
+    <div class="draw-box" style="height:130px"></div>`;
+}
+
+// ── 8. Squiggle Time ──────────────────────────────────────────────────────────
+function genSquiggle(){
+  const SW=610,SH=420;
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  const count=2+Math.floor(Math.random()*3);
+  const types=shuffle([
+    ()=>{const x1=rnd(60,200),y1=rnd(100,320),x2=rnd(300,500),y2=rnd(80,340),cx1=rnd(100,300),cy1=rnd(40,120),cx2=rnd(280,480),cy2=rnd(260,380);return `M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`;},
+    ()=>{const x=rnd(100,460),y=rnd(120,300),r=rnd(30,70);return `M${x},${y} C${x+r},${y-r*1.2} ${x+r*2},${y+r*0.5} ${x+r},${y+r} C${x},${y+r*1.5} ${x-r*0.5},${y+r*0.5} ${x},${y}`;},
+    ()=>{let d=`M${rnd(40,100)},${rnd(150,280)}`;for(let i=0;i<4;i++)d+=` L${rnd(100+i*110,160+i*110)},${i%2===0?rnd(80,160):rnd(260,360)}`;return d;},
+    ()=>{const cx=rnd(150,450),cy=rnd(150,280);let d='';for(let i=0;i<=120;i++){const t=i/120,a=-Math.PI/2+t*3*2*Math.PI,r=12+t*45;d+=(i===0?'M':'L')+`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;}return d;},
+    ()=>{const cx=rnd(180,430),cy=rnd(150,280),pts=[];for(let i=0;i<6;i++){const a=(i/6)*Math.PI*2,r=rnd(30,70);pts.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;for(let i=1;i<=pts.length;i++){const p=pts[i%pts.length];d+=` L${p[0].toFixed(1)},${p[1].toFixed(1)}`;}return d+' Z';},
+  ]);
+  const paths=types.slice(0,count).map(fn=>fn());
+  const svgPaths=paths.map(d=>`<path d="${d}" stroke="#2E3A4A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
+  const prompt=shuffle(['What do you see? Finish the picture!','Add to the squiggles — what could they be?','Turn these lines into something amazing.','These squiggles are the start of something… what?','Can you see a hidden picture? Draw it!'])[0];
+  return `<p class="ws-tip">Look carefully at the squiggles. Turn the page if that helps. What do you see?</p>${randomPrompt()}
+    <p class="squiggle-prompt">${prompt}</p>
+    <svg class="squiggle-canvas" width="${SW}" height="${SH}" xmlns="http://www.w3.org/2000/svg"><rect width="${SW}" height="${SH}" fill="white"/><rect x="6" y="6" width="${SW-12}" height="${SH-12}" fill="none" stroke="#d8d0bc" stroke-width="1" stroke-dasharray="8,5" rx="4"/>${svgPaths}</svg>
+    <div style="margin-top:10px;font-family:'DM Mono',monospace;font-size:0.6rem;color:#ccc;letter-spacing:0.08em">Tip: rotate the page and look from different angles!</div>
+    <div class="ws-section" style="margin-top:16px">What's your picture called?</div>
+    <div class="write-box" style="height:44px"><span class="write-box-label">my picture is…</span></div>`;
+}
+
+// ── 9. Maze Missions ──────────────────────────────────────────────────────────
+function buildMaze(cols,rows){
+  const vis=Array.from({length:rows},()=>new Array(cols).fill(false));
+  const Walls=Array.from({length:rows},()=>Array.from({length:cols},()=>({n:true,e:true,s:true,w:true})));
+  const stack=[];let x=0,y=0;vis[0][0]=true;let done=1;const total=cols*rows;
+  while(done<total){
+    const nb=[];
+    if(y>0&&!vis[y-1][x])nb.push([x,y-1,'n','s']);
+    if(x<cols-1&&!vis[y][x+1])nb.push([x+1,y,'e','w']);
+    if(y<rows-1&&!vis[y+1][x])nb.push([x,y+1,'s','n']);
+    if(x>0&&!vis[y][x-1])nb.push([x-1,y,'w','e']);
+    if(nb.length){stack.push([x,y]);const[nx,ny,d,op]=nb[Math.floor(Math.random()*nb.length)];Walls[y][x][d]=false;Walls[ny][nx][op]=false;vis[ny][nx]=true;x=nx;y=ny;done++;}
+    else if(stack.length){[x,y]=stack.pop();}else break;
+  }
+  Walls[0][0].n=false;Walls[rows-1][cols-1].s=false;return Walls;
+}
+function mazeSVG(walls,cs){
+  const rows=walls.length,cols=walls[0].length,w=cols*cs,h=rows*cs,lines=[];
+  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const px=x*cs,py=y*cs,c=walls[y][x];
+    if(c.n)lines.push(`<line x1="${px}" y1="${py}" x2="${px+cs}" y2="${py}"/>`);
+    if(c.e)lines.push(`<line x1="${px+cs}" y1="${py}" x2="${px+cs}" y2="${py+cs}"/>`);
+    if(c.s)lines.push(`<line x1="${px}" y1="${py+cs}" x2="${px+cs}" y2="${py+cs}"/>`);
+    if(c.w)lines.push(`<line x1="${px}" y1="${py}" x2="${px}" y2="${py+cs}"/>`);}
+  return `<div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#bbb;letter-spacing:0.1em;margin-bottom:3px">▼ Start here</div><svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" style="display:block"><rect width="${w}" height="${h}" fill="white"/><g stroke="#2E3A4A" stroke-width="1.5" stroke-linecap="square">${lines.join('')}</g></svg><div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#bbb;letter-spacing:0.1em;margin-top:3px;text-align:right">Finish ▲</div>`;
+}
+function genMaze(){
+  const diff=difficulty();
+  const [cols,rows]=diff==='easy'?[7,9]:diff==='medium'?[10,12]:[13,15];
+  const cs=diff==='easy'?48:diff==='medium'?42:32;
+  const walls=buildMaze(cols,rows);
+  return `<p class="ws-tip">Find your way from Start to Finish without crossing any walls.</p>${randomPrompt()}
+    <div class="ws-section">Find the way through</div>
+    <div style="display:flex;gap:28px;align-items:flex-start"><div>${mazeSVG(walls,cs)}</div>
+    <div style="flex:1"><div class="ws-section" style="margin-top:0">Draw your own maze</div>
+    <div class="draw-box" style="height:260px"></div>
+    <div style="margin-top:10px;font-family:'Crimson Pro',Georgia,serif;font-size:0.9rem;color:#bbb;font-style:italic">Can your friend solve yours?</div></div></div>`;
+}
+
+// ── 10. Make a Map ────────────────────────────────────────────────────────────
+function genMapMaker(){
+  const MW=540,MH=340;
+  function coastline(){const pts=[],cx=MW/2,cy=MH/2;for(let i=0;i<24;i++){const a=(i/24)*Math.PI*2-Math.PI/2,r=90+(Math.random()-0.5)*60+Math.sin(i*1.3)*25+Math.cos(i*2.1)*20;pts.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;for(let i=1;i<pts.length;i++){const prev=pts[i-1],curr=pts[i];const cpx1=prev[0]+(curr[0]-prev[0])*0.4,cpy1=prev[1]+(curr[1]-prev[1])*0.4;d+=` Q${cpx1.toFixed(1)},${cpy1.toFixed(1)} ${curr[0].toFixed(1)},${curr[1].toFixed(1)}`;}return d+' Z';}
+  const island=coastline();
+  const smallIslands=[1,2].map(()=>{const x=40+Math.random()*(MW-80),y=30+Math.random()*(MH-60),r=12+Math.random()*18;return `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${r.toFixed(0)}" ry="${(r*0.65).toFixed(0)}" fill="#dde8c8" stroke="#a8b890" stroke-width="1"/>`;}).join('');
+  const compass=`<g transform="translate(${MW-50},${MH-50})"><circle r="18" fill="white" stroke="#ccc" stroke-width="1"/><polygon points="0,-15 4,-5 0,-8 -4,-5" fill="#2E3A4A"/><polygon points="0,15 4,5 0,8 -4,5" fill="#ccc"/><polygon points="-15,0 -5,-4 -8,0 -5,4" fill="#ccc"/><polygon points="15,0 5,-4 8,0 5,4" fill="#ccc"/><text x="-3" y="-17" font-family="DM Mono,monospace" font-size="7" fill="#2E3A4A">N</text></g>`;
+  const scale=`<g transform="translate(16,${MH-22})"><line x1="0" y1="0" x2="60" y2="0" stroke="#999" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="#999" stroke-width="1.5"/><line x1="60" y1="-4" x2="60" y2="4" stroke="#999" stroke-width="1.5"/><text x="30" y="-6" text-anchor="middle" font-family="DM Mono,monospace" font-size="6.5" fill="#999">1 day's walk</text></g>`;
+  const labelBoxes=[{x:MW/2-40,y:16,w:80,label:'Name this land'},{x:20,y:MH/2-12,w:80,label:'Western sea'}].map(b=>`<rect x="${b.x}" y="${b.y}" width="${b.w}" height="14" fill="none" stroke="#d8d0bc" stroke-width="0.75" stroke-dasharray="3,3"/><text x="${b.x+b.w/2}" y="${b.y+10}" text-anchor="middle" font-family="DM Mono,monospace" font-size="6" fill="#ccc">${b.label}</text>`).join('');
+  return `<p class="ws-tip">A new land has been found! You're the cartographer — add everything.</p>${randomPrompt()}
+    <div class="ws-section">Add mountains, villages, rivers, forests — and name everything!</div>
+    <svg class="map-canvas" width="${MW}" height="${MH}" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:14px"><rect width="${MW}" height="${MH}" fill="#ddeef8"/>${Array.from({length:12},(_,i)=>`<line x1="0" y1="${30+i*26}" x2="${MW}" y2="${28+i*26}" stroke="#c8dff0" stroke-width="0.5"/>`).join('')}${smallIslands}<path d="${island}" fill="#dde8c8" stroke="#8aaa6a" stroke-width="2" stroke-linejoin="round"/>${compass}${scale}${labelBoxes}</svg>
+    <div class="ws-section">Map legend — draw the symbols you used</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">${[1,2,3,4].map(()=>`<div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border:1px solid #e0e0e0;border-radius:4px;background:white"></div><div style="width:80px;border-bottom:1px solid #ddd;height:1.2rem"></div></div>`).join('')}</div>`;
+}
+
+// ── 11. Finish the Creature ───────────────────────────────────────────────────
+function genFinishCreature(){
+  const CW=560,CH=360,cx=CW/2,ST='#2E3A4A',SW=2.5;
+  const creatures=shuffle([
+    {desc:'a friendly robot',hint:'Match every shape on the left, then add your own details.',svg:()=>`<line x1="${cx}" y1="30" x2="${cx}" y2="55" stroke="${ST}" stroke-width="2"/><circle cx="${cx}" cy="27" r="7" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx-60}" y="55" width="120" height="80" rx="10" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx-48}" y="75" width="24" height="18" rx="4" fill="none" stroke="${ST}" stroke-width="2"/><rect x="${cx+24}" y="75" width="24" height="18" rx="4" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-36}" cy="84" r="4" fill="${ST}"/><circle cx="${cx+36}" cy="84" r="4" fill="${ST}"/><rect x="${cx-28}" y="108" width="56" height="14" rx="4" fill="none" stroke="${ST}" stroke-width="2"/>${[cx-20,cx-8,cx+4,cx+16].map(x=>`<line x1="${x}" y1="108" x2="${x}" y2="122" stroke="${ST}" stroke-width="1.5"/>`).join('')}<rect x="${cx-12}" y="135" width="24" height="16" fill="none" stroke="${ST}" stroke-width="2"/><rect x="${cx-70}" y="151" width="140" height="110" rx="8" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx-42}" y="165" width="84" height="50" rx="5" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx-24}" cy="182" r="9" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx}" cy="182" r="9" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx+24}" cy="182" r="9" fill="none" stroke="${ST}" stroke-width="1.5"/><rect x="${cx-28}" y="200" width="56" height="8" rx="3" fill="none" stroke="${ST}" stroke-width="1.5"/><rect x="${cx-98}" y="155" width="28" height="70" rx="10" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx+70}" y="155" width="28" height="70" rx="10" fill="none" stroke="${ST}" stroke-width="${SW}"/>${[-3,9,21].map(dx=>`<rect x="${cx-104+dx}" y="225" width="10" height="20" rx="4" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}${[-3,9,21].map(dx=>`<rect x="${cx+70+dx}" y="225" width="10" height="20" rx="4" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}<rect x="${cx-52}" y="261" width="36" height="72" rx="8" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx+16}" y="261" width="36" height="72" rx="8" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx-58}" y="328" width="48" height="18" rx="6" fill="none" stroke="${ST}" stroke-width="2"/><rect x="${cx+10}" y="328" width="48" height="18" rx="6" fill="none" stroke="${ST}" stroke-width="2"/>`},
+    {desc:'a wise owl',hint:'Copy the feathers, wing, and foot — then add your own markings.',svg:()=>`<polygon points="${cx-38},45 ${cx-22},75 ${cx-55},72" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linejoin="round"/><polygon points="${cx+38},45 ${cx+22},75 ${cx+55},72" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linejoin="round"/><ellipse cx="${cx}" cy="115" rx="68" ry="62" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx}" cy="122" rx="50" ry="46" fill="none" stroke="${ST}" stroke-width="1.5" stroke-dasharray="4,3"/><circle cx="${cx-22}" cy="108" r="20" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx+22}" cy="108" r="20" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-22}" cy="108" r="9" fill="${ST}"/><circle cx="${cx+22}" cy="108" r="9" fill="${ST}"/><circle cx="${cx-17}" cy="103" r="3" fill="white"/><circle cx="${cx+17}" cy="103" r="3" fill="white"/><polygon points="${cx},128 ${cx-10},148 ${cx+10},148" fill="none" stroke="${ST}" stroke-width="2" stroke-linejoin="round"/><ellipse cx="${cx}" cy="235" rx="75" ry="85" fill="none" stroke="${ST}" stroke-width="${SW}"/><path d="M${cx-75},200 Q${cx-115},235 ${cx-80},300" fill="none" stroke="${ST}" stroke-width="2"/><path d="M${cx+75},200 Q${cx+115},235 ${cx+80},300" fill="none" stroke="${ST}" stroke-width="2"/>${[195,220,248].map(y=>`<path d="M${cx-50},${y} Q${cx},${y-14} ${cx+50},${y}" fill="none" stroke="${ST}" stroke-width="1.2"/>`).join('')}<line x1="${cx-90}" y1="318" x2="${cx+90}" y2="318" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><line x1="${cx-30}" y1="318" x2="${cx-44}" y2="338" stroke="${ST}" stroke-width="2"/><line x1="${cx-30}" y1="318" x2="${cx-28}" y2="340" stroke="${ST}" stroke-width="2"/><line x1="${cx-30}" y1="318" x2="${cx-14}" y2="338" stroke="${ST}" stroke-width="2"/><line x1="${cx+30}" y1="318" x2="${cx+14}" y2="338" stroke="${ST}" stroke-width="2"/><line x1="${cx+30}" y1="318" x2="${cx+28}" y2="340" stroke="${ST}" stroke-width="2"/><line x1="${cx+30}" y1="318" x2="${cx+44}" y2="338" stroke="${ST}" stroke-width="2"/>`},
+    {desc:'a strange alien',hint:'Copy every antenna, arm, and marking — then decide what colour it is!',svg:()=>`<line x1="${cx-20}" y1="38" x2="${cx-38}" y2="18" stroke="${ST}" stroke-width="2"/><circle cx="${cx-40}" cy="14" r="6" fill="none" stroke="${ST}" stroke-width="2"/><line x1="${cx+20}" y1="38" x2="${cx+38}" y2="18" stroke="${ST}" stroke-width="2"/><circle cx="${cx+40}" cy="14" r="6" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx}" cy="105" rx="80" ry="72" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx-28}" cy="95" rx="22" ry="28" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx+28}" cy="95" rx="22" ry="28" fill="none" stroke="${ST}" stroke-width="${SW}"/><polygon points="${cx-28},78 ${cx-18},95 ${cx-28},112 ${cx-38},95" fill="${ST}"/><polygon points="${cx+28},78 ${cx+38},95 ${cx+28},112 ${cx+18},95" fill="${ST}"/><line x1="${cx-8}" y1="132" x2="${cx-4}" y2="140" stroke="${ST}" stroke-width="2"/><line x1="${cx+8}" y1="132" x2="${cx+4}" y2="140" stroke="${ST}" stroke-width="2"/><path d="M${cx-30},152 Q${cx},162 ${cx+30},152" fill="none" stroke="${ST}" stroke-width="2"/><rect x="${cx-14}" y="175" width="28" height="20" rx="6" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx}" cy="255" rx="55" ry="75" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx}" cy="245" rx="30" ry="20" fill="none" stroke="${ST}" stroke-width="1.2"/><ellipse cx="${cx}" cy="245" rx="16" ry="10" fill="none" stroke="${ST}" stroke-width="1.2"/><path d="M${cx-55},220 Q${cx-100},240 ${cx-90},290" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+55},220 Q${cx+100},240 ${cx+90},290" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/>${[-10,0,10].map(dx=>`<line x1="${cx-90+dx}" y1="290" x2="${cx-88+dx}" y2="314" stroke="${ST}" stroke-width="2" stroke-linecap="round"/>`).join('')}${[-10,0,10].map(dx=>`<line x1="${cx+90+dx}" y1="290" x2="${cx+88+dx}" y2="314" stroke="${ST}" stroke-width="2" stroke-linecap="round"/>`).join('')}<line x1="${cx-22}" y1="330" x2="${cx-28}" y2="355" stroke="${ST}" stroke-width="3" stroke-linecap="round"/><line x1="${cx+22}" y1="330" x2="${cx+28}" y2="355" stroke="${ST}" stroke-width="3" stroke-linecap="round"/><circle cx="${cx-28}" cy="355" r="9" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+28}" cy="355" r="9" fill="none" stroke="${ST}" stroke-width="2"/>`},
+    {desc:'a big friendly bear',hint:'Copy the ear, arm, and paw — then give it a face expression!',svg:()=>`<circle cx="${cx-48}" cy="38" r="20" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-48}" cy="38" r="10" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx+48}" cy="38" r="20" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx+48}" cy="38" r="10" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx}" cy="110" r="72" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx}" cy="144" rx="30" ry="20" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx}" cy="136" rx="12" ry="7" fill="${ST}"/><path d="M${cx},146 L${cx-8},157 M${cx},146 L${cx+8},157" fill="none" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><circle cx="${cx-26}" cy="94" r="10" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+26}" cy="94" r="10" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-26}" cy="94" r="4" fill="${ST}"/><circle cx="${cx+26}" cy="94" r="4" fill="${ST}"/><line x1="${cx-36}" y1="80" x2="${cx-18}" y2="77" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><line x1="${cx+18}" y1="77" x2="${cx+36}" y2="80" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><ellipse cx="${cx}" cy="248" rx="78" ry="76" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx}" cy="242" rx="44" ry="46" fill="none" stroke="${ST}" stroke-width="1.5"/><path d="M${cx-78},214 Q${cx-118},230 ${cx-104},276" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><path d="M${cx+78},214 Q${cx+118},230 ${cx+104},276" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/>${[-14,0,14].map(dx=>`<circle cx="${cx-104+dx}" cy="283" r="8" fill="none" stroke="${ST}" stroke-width="2"/>`).join('')}${[-14,0,14].map(dx=>`<circle cx="${cx+104+dx}" cy="283" r="8" fill="none" stroke="${ST}" stroke-width="2"/>`).join('')}<ellipse cx="${cx-34}" cy="322" rx="24" ry="12" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx+34}" cy="322" rx="24" ry="12" fill="none" stroke="${ST}" stroke-width="${SW}"/>`},
+    {desc:'a curious cat',hint:'Copy the ear, eye, and whiskers — then choose your own fur pattern!',svg:()=>`<polygon points="${cx-52},30 ${cx-28},70 ${cx-75},68" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linejoin="round"/><polygon points="${cx+52},30 ${cx+28},70 ${cx+75},68" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linejoin="round"/><polygon points="${cx-52},36 ${cx-32},64 ${cx-70},62" fill="none" stroke="${ST}" stroke-width="1.2"/><polygon points="${cx+52},36 ${cx+32},64 ${cx+70},62" fill="none" stroke="${ST}" stroke-width="1.2"/><circle cx="${cx}" cy="135" r="80" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx-28}" cy="118" rx="18" ry="22" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx+28}" cy="118" rx="18" ry="22" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx-28}" cy="120" rx="7" ry="14" fill="${ST}"/><ellipse cx="${cx+28}" cy="120" rx="7" ry="14" fill="${ST}"/><circle cx="${cx-24}" cy="113" r="3" fill="white"/><circle cx="${cx+24}" cy="113" r="3" fill="white"/><ellipse cx="${cx}" cy="158" rx="20" ry="14" fill="none" stroke="${ST}" stroke-width="1.5"/><ellipse cx="${cx}" cy="153" rx="8" ry="5" fill="${ST}"/><path d="M${cx},162 L${cx-8},172 M${cx},162 L${cx+8},172" fill="none" stroke="${ST}" stroke-width="1.5" stroke-linecap="round"/>${[-50,-30,-10].map(dx=>`<line x1="${cx+dx}" y1="148" x2="${cx+dx-18}" y2="145" stroke="${ST}" stroke-width="1.2" stroke-linecap="round"/>`).join('')}${[10,30,50].map(dx=>`<line x1="${cx+dx}" y1="148" x2="${cx+dx+18}" y2="145" stroke="${ST}" stroke-width="1.2" stroke-linecap="round"/>`).join('')}<ellipse cx="${cx}" cy="258" rx="72" ry="82" fill="none" stroke="${ST}" stroke-width="${SW}"/><path d="M${cx-72},240 Q${cx-115},258 ${cx-100},310" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+72},240 Q${cx+115},258 ${cx+100},310" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/>${[-16,0,16].map(dx=>`<circle cx="${cx-100+dx}" cy="316" r="7" fill="none" stroke="${ST}" stroke-width="2"/>`).join('')}${[-16,0,16].map(dx=>`<circle cx="${cx+100+dx}" cy="316" r="7" fill="none" stroke="${ST}" stroke-width="2"/>`).join('')}<line x1="${cx-28}" y1="340" x2="${cx-32}" y2="355" stroke="${ST}" stroke-width="3" stroke-linecap="round"/><line x1="${cx+28}" y1="340" x2="${cx+32}" y2="355" stroke="${ST}" stroke-width="3" stroke-linecap="round"/><path d="M${cx},340 Q${cx+60},320 ${cx+110},345" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx},340 Q${cx-60},320 ${cx-110},345" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/>`},
+    {desc:'a proud penguin',hint:'Copy the wing, eye, and belly — then add a bow tie or scarf!',svg:()=>`<ellipse cx="${cx}" cy="268" rx="62" ry="78" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx}" cy="282" rx="38" ry="58" fill="none" stroke="${ST}" stroke-width="1.5"/><ellipse cx="${cx}" cy="118" rx="52" ry="54" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-22}" cy="100" r="14" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+22}" cy="100" r="14" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-22}" cy="101" r="6" fill="${ST}"/><circle cx="${cx+22}" cy="101" r="6" fill="${ST}"/><circle cx="${cx-18}" cy="97" r="2.5" fill="white"/><circle cx="${cx+18}" cy="97" r="2.5" fill="white"/><ellipse cx="${cx}" cy="142" rx="14" ry="9" fill="none" stroke="${ST}" stroke-width="1.5"/><ellipse cx="${cx}" cy="141" rx="6" ry="4" fill="${ST}"/><path d="M${cx-62},200 Q${cx-104},228 ${cx-86},296" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><path d="M${cx+62},200 Q${cx+104},228 ${cx+86},296" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><ellipse cx="${cx-88}" cy="302" rx="19" ry="10" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx+88}" cy="302" rx="19" ry="10" fill="none" stroke="${ST}" stroke-width="2"/><line x1="${cx-20}" y1="342" x2="${cx-20}" y2="372" stroke="${ST}" stroke-width="2"/><line x1="${cx+20}" y1="342" x2="${cx+20}" y2="372" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx-20}" cy="378" rx="22" ry="10" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx+20}" cy="378" rx="22" ry="10" fill="none" stroke="${ST}" stroke-width="2"/>`},
+    {desc:'a mighty lion',hint:'Copy the mane spikes, ear, and paw — then decide how fierce it looks!',svg:()=>`${Array.from({length:10},(_,i)=>{const a=(i/10)*Math.PI*2-Math.PI/2;const mx=cx+Math.cos(a)*76;const my=112+Math.sin(a)*76;const tx=cx+Math.cos(a)*106;const ty=112+Math.sin(a)*106;return `<polygon points="${mx-8},${my} ${mx+8},${my} ${tx},${ty}" fill="none" stroke="${ST}" stroke-width="2" stroke-linejoin="round"/>`;}).join('')}<circle cx="${cx}" cy="112" r="72" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-44}" cy="54" r="16" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+44}" cy="54" r="16" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-44}" cy="57" r="7" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx+44}" cy="57" r="7" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx-26}" cy="102" r="15" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+26}" cy="102" r="15" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-26}" cy="103" r="7" fill="${ST}"/><circle cx="${cx+26}" cy="103" r="7" fill="${ST}"/><circle cx="${cx-22}" cy="98" r="3" fill="white"/><circle cx="${cx+22}" cy="98" r="3" fill="white"/><ellipse cx="${cx}" cy="138" rx="32" ry="20" fill="none" stroke="${ST}" stroke-width="1.5"/><ellipse cx="${cx}" cy="131" rx="14" ry="8" fill="${ST}"/><path d="M${cx},140 L${cx-10},152 M${cx},140 L${cx+10},152" fill="none" stroke="${ST}" stroke-width="2" stroke-linecap="round"/>${[-38,-20,-2].map(dx=>`<line x1="${cx+dx}" y1="132" x2="${cx+dx-14}" y2="128" stroke="${ST}" stroke-width="1.5" stroke-linecap="round"/>`).join('')}${[2,20,38].map(dx=>`<line x1="${cx+dx}" y1="132" x2="${cx+dx+14}" y2="128" stroke="${ST}" stroke-width="1.5" stroke-linecap="round"/>`).join('')}<ellipse cx="${cx}" cy="256" rx="72" ry="66" fill="none" stroke="${ST}" stroke-width="${SW}"/><path d="M${cx-72},228 Q${cx-112},242 ${cx-98},290" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><path d="M${cx+72},228 Q${cx+112},242 ${cx+98},290" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/>${[-14,0,14].map(dx=>`<ellipse cx="${cx-98+dx}" cy="297" rx="9" ry="7" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}${[-14,0,14].map(dx=>`<ellipse cx="${cx+98+dx}" cy="297" rx="9" ry="7" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}<ellipse cx="${cx-30}" cy="318" rx="24" ry="11" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx+30}" cy="318" rx="24" ry="11" fill="none" stroke="${ST}" stroke-width="2"/>`},
+    {desc:'a happy frog',hint:'Copy the eye, arm, and leg — then add spots or stripes!',svg:()=>`<ellipse cx="${cx}" cy="200" rx="88" ry="78" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-46}" cy="138" r="26" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx+46}" cy="138" r="26" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-46}" cy="138" r="13" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx+46}" cy="138" r="13" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx-46}" cy="138" r="6" fill="${ST}"/><circle cx="${cx+46}" cy="138" r="6" fill="${ST}"/><circle cx="${cx-42}" cy="134" r="2.5" fill="white"/><circle cx="${cx+42}" cy="134" r="2.5" fill="white"/><ellipse cx="${cx}" cy="218" rx="46" ry="30" fill="none" stroke="${ST}" stroke-width="1.5"/><path d="M${cx-18},202 Q${cx},194 ${cx+18},202" fill="none" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><path d="M${cx-88},216 Q${cx-130},236 ${cx-112},278" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+88},216 Q${cx+130},236 ${cx+112},278" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/>${[-12,0,12,24].map(dx=>`<circle cx="${cx-112+dx}" cy="282" r="6" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}${[-24,-12,0,12].map(dx=>`<circle cx="${cx+112+dx}" cy="282" r="6" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}<path d="M${cx-44},272 Q${cx-68},318 ${cx-48},348" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><path d="M${cx+44},272 Q${cx+68},318 ${cx+48},348" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/>${[-18,-6,6,18].map(dx=>`<ellipse cx="${cx-48+dx}" cy="352" rx="7" ry="5" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}${[-18,-6,6,18].map(dx=>`<ellipse cx="${cx+48+dx}" cy="352" rx="7" ry="5" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}`},
+    {desc:'a wiggly octopus',hint:'Copy each curling arm, then add suction cups along the edges!',svg:()=>`<ellipse cx="${cx}" cy="115" rx="85" ry="72" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-28}" cy="98" r="16" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+28}" cy="98" r="16" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-28}" cy="99" r="7" fill="${ST}"/><circle cx="${cx+28}" cy="99" r="7" fill="${ST}"/><circle cx="${cx-23}" cy="94" r="3" fill="white"/><circle cx="${cx+23}" cy="94" r="3" fill="white"/><path d="M${cx-10},144 Q${cx-5},154 ${cx},148 Q${cx+5},142 ${cx+10},154" fill="none" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><path d="M${cx-85},126 Q${cx-132},142 ${cx-112},192 Q${cx-96},232 ${cx-122},262" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+85},126 Q${cx+132},142 ${cx+112},192 Q${cx+96},232 ${cx+122},262" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx-66},178 Q${cx-104},202 ${cx-86},252 Q${cx-72},288 ${cx-94},318" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+66},178 Q${cx+104},202 ${cx+86},252 Q${cx+72},288 ${cx+94},318" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx-40},184 Q${cx-63},222 ${cx-48},272 Q${cx-36},308 ${cx-52},342" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+40},184 Q${cx+63},222 ${cx+48},272 Q${cx+36},308 ${cx+52},342" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx-16},187 Q${cx-26},238 ${cx-14},286 Q${cx-6},318 ${cx-18},350" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+16},187 Q${cx+26},238 ${cx+14},286 Q${cx+6},318 ${cx+18},350" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/>${[0,1,2,3].map(i=>`<circle cx="${cx-112+i*7}" cy="${208+i*18}" r="4" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}${[0,1,2,3].map(i=>`<circle cx="${cx+112-i*7}" cy="${208+i*18}" r="4" fill="none" stroke="${ST}" stroke-width="1.5"/>`).join('')}`},
+    {desc:'a stompy dinosaur',hint:'Match the spikes on top and the little arm — then give it scales!',svg:()=>`${[-54,-36,-18,0,18,36,54].map(dx=>`<polygon points="${cx+dx-10},58 ${cx+dx},28 ${cx+dx+10},58" fill="none" stroke="${ST}" stroke-width="2" stroke-linejoin="round"/>`).join('')}<circle cx="${cx}" cy="118" r="66" fill="none" stroke="${ST}" stroke-width="${SW}"/><circle cx="${cx-24}" cy="98" r="15" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx+24}" cy="98" r="15" fill="none" stroke="${ST}" stroke-width="2"/><circle cx="${cx-24}" cy="99" r="6" fill="${ST}"/><circle cx="${cx+24}" cy="99" r="6" fill="${ST}"/><circle cx="${cx-20}" cy="94" r="2.5" fill="white"/><circle cx="${cx+20}" cy="94" r="2.5" fill="white"/><path d="M${cx-18},144 Q${cx},155 ${cx+18},144" fill="none" stroke="${ST}" stroke-width="2" stroke-linecap="round"/>${[-8,-2,2,8].map(x=>`<line x1="${cx+x}" y1="144" x2="${cx+x}" y2="154" stroke="${ST}" stroke-width="1.5"/>`).join('')}<ellipse cx="${cx}" cy="252" rx="76" ry="84" fill="none" stroke="${ST}" stroke-width="${SW}"/><path d="M${cx-68},184 Q${cx-106},196 ${cx-90},236" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><path d="M${cx+68},184 Q${cx+106},196 ${cx+90},236" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><line x1="${cx-90}" y1="236" x2="${cx-100}" y2="252" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><line x1="${cx-90}" y1="236" x2="${cx-80}" y2="252" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><line x1="${cx+90}" y1="236" x2="${cx+100}" y2="252" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><line x1="${cx+90}" y1="236" x2="${cx+80}" y2="252" stroke="${ST}" stroke-width="2" stroke-linecap="round"/><rect x="${cx-44}" y="332" width="30" height="56" rx="10" fill="none" stroke="${ST}" stroke-width="${SW}"/><rect x="${cx+14}" y="332" width="30" height="56" rx="10" fill="none" stroke="${ST}" stroke-width="${SW}"/><ellipse cx="${cx-29}" cy="346" rx="7" ry="9" fill="${ST}"/><ellipse cx="${cx+29}" cy="346" rx="7" ry="9" fill="${ST}"/>`},
+    {desc:'a spooky ghost',hint:'Follow the wavy edges carefully on both sides, then add a face!',svg:()=>`<path d="M${cx-72},108 Q${cx-100},65 ${cx},48 Q${cx+100},65 ${cx+72},108" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round"/><line x1="${cx-72}" y1="108" x2="${cx-72}" y2="288" stroke="${ST}" stroke-width="${SW}"/><line x1="${cx+72}" y1="108" x2="${cx+72}" y2="288" stroke="${ST}" stroke-width="${SW}"/><path d="M${cx-72},288 Q${cx-58},268 ${cx-44},288 Q${cx-30},308 ${cx-16},288 Q${cx-2},268 ${cx+12},288 Q${cx+26},308 ${cx+40},288 Q${cx+54},268 ${cx+72},288" fill="none" stroke="${ST}" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="${cx-26}" cy="162" rx="19" ry="23" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx+26}" cy="162" rx="19" ry="23" fill="none" stroke="${ST}" stroke-width="2"/><ellipse cx="${cx-26}" cy="164" rx="9" ry="14" fill="${ST}"/><ellipse cx="${cx+26}" cy="164" rx="9" ry="14" fill="${ST}"/><circle cx="${cx-21}" cy="157" r="4" fill="white"/><circle cx="${cx+21}" cy="157" r="4" fill="white"/><path d="M${cx-22},212 Q${cx},226 ${cx+22},212" fill="none" stroke="${ST}" stroke-width="2.5" stroke-linecap="round"/><circle cx="${cx-58}" cy="96" r="8" fill="none" stroke="${ST}" stroke-width="1.5"/><circle cx="${cx+58}" cy="96" r="8" fill="none" stroke="${ST}" stroke-width="1.5"/>`},
+  ]);
+  const creature=creatures[0],clipId='leftHalf';
+  const GS=40,gridCols=Math.ceil(CW/GS),gridRows=Math.ceil(CH/GS);
+  const gridLines=[...Array.from({length:gridRows+1},(_,i)=>`<line x1="0" y1="${i*GS}" x2="${CW}" y2="${i*GS}" stroke="#e8e4de" stroke-width="0.75"/>`), ...Array.from({length:gridCols+1},(_,i)=>`<line x1="${i*GS}" y1="0" x2="${i*GS}" y2="${CH}" stroke="#e8e4de" stroke-width="0.75"/>`)].join('');
+  return `<p class="ws-tip">Look at the left side carefully. Use the grid squares to copy each shape onto the right.</p>${randomPrompt()}
+    <div class="ws-section">It's ${creature.desc} — finish the right side!</div>
+    <p style="font-family:'Crimson Pro',Georgia,serif;font-size:0.9rem;color:#aaa;font-style:italic;margin:4px 0 10px">${creature.hint}</p>
+    <svg class="creature-canvas" width="${CW}" height="${CH}" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:14px"><defs><clipPath id="${clipId}"><rect x="0" y="0" width="${cx}" height="${CH}"/></clipPath></defs><rect width="${CW}" height="${CH}" fill="white"/>${gridLines}<g clip-path="url(#${clipId})">${creature.svg()}</g><line x1="${cx}" y1="0" x2="${cx}" y2="${CH}" stroke="#c8bfaa" stroke-width="1.5" stroke-dasharray="8,5"/><text x="${cx+6}" y="${CH-6}" font-family="DM Mono,monospace" font-size="8" fill="#ccc" letter-spacing="1">YOUR TURN →</text></svg>
+    <div class="ws-section">Name your creature and give it a superpower</div>
+    <div style="display:flex;gap:16px"><div style="flex:1"><div class="ws-field-label">Name</div><div class="write-box" style="height:38px;margin-top:4px"></div></div><div style="flex:2"><div class="ws-field-label">Special power</div><div class="write-box" style="height:38px;margin-top:4px"></div></div></div>`;
+}
+
+// ── 12. Make a Comic ─────────────────────────────────────────────────────────
+function genComicStrip(){
+  const settings=shuffle(['in a deep jungle','on a distant planet','under the ocean','at the top of a mountain','in a magical forest','inside a volcano','in a flying city','at the bottom of a well']);
+  const characters=shuffle(['a tiny robot','a forgetful wizard','a talking dog','a brave mouse','two best friends','a very old tortoise','a lost explorer','a cloud who sneezes']);
+  const problems=shuffle(['something goes missing','a strange sound is heard','the path disappears','an unexpected visitor arrives','nothing works the way it should','a door appears from nowhere']);
+  const endings=shuffle(['everything changes forever','they find what they were looking for','a new friendship begins','the mystery is finally solved','they discover a secret']);
+  const captions=[`${characters[0]} was ${settings[0]}…`,`Then, ${problems[0]}.`,`They tried everything…`,`In the end, ${endings[0]}.`];
+  const panels=captions.map((cap,i)=>`<div class="comic-panel"><div class="comic-draw-area"></div><div class="comic-caption">${i+1}. ${cap}</div></div>`).join('');
+  return `<p class="ws-tip">Draw one scene in each panel. Sketch lightly first, then go over your lines.</p>${randomPrompt()}
+    <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px"><span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#aaa;letter-spacing:0.1em">Title:</span><div style="flex:1;border-bottom:1.5px solid #ddd;height:1.4rem"></div></div>
+    <div class="comic-strip">${panels}</div>`;
+}
+
+// ── 13. Story Starter Dice ────────────────────────────────────────────────────
+function genStoryDice(){
+  const pool=['🐉','🏰','🌊','🦁','🚀','🌋','🏔️','🦋','🎩','🔮','🐠','🌈','⚡','🦄','🍄','🐺','🌙','🎪','🦅','🌺','🐙','🎸','🗝️','🏹','🐸','🌞','🦊','🌿','⚓','🎭','🌠'];
+  const rolled=shuffle(pool).slice(0,5);
+  const scenes=['Something strange happened at the beginning…','Then suddenly…','By the end of the story…','The place where it happened…','The most important thing…'];
+  const dice=rolled.map(e=>`<div class="dice-face">${e}</div>`).join('');
+  const sceneHints=scenes.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px"><div class="dice-face" style="width:44px;height:44px;font-size:22px;flex-shrink:0">${rolled[i]}</div><div style="flex:1"><div style="font-family:'Crimson Pro',Georgia,serif;font-size:0.9rem;color:#aaa;font-style:italic;margin-bottom:3px">${s}</div><div class="write-box" style="height:38px"></div></div></div>`).join('');
+  return `<p class="ws-tip">Roll your dice — you got these 5! Use all of them to build your story.</p>${randomPrompt()}
+    <div class="ws-section">Your story dice</div><div class="dice-row">${dice}</div>
+    <div class="ws-section">Draw your story scene</div><div class="draw-box" style="height:180px;margin-bottom:14px"></div>
+    <div class="ws-section">Write what happened — one idea per die</div>${sceneHints}`;
+}
+
+// ── 14. Word Mix-Up ───────────────────────────────────────────────────────────
+function genWordScramble(){
+  const diff=difficulty();
+  const easyWords=[[{word:'FROG',emoji:'🐸'},{word:'BIRD',emoji:'🐦'},{word:'FISH',emoji:'🐟'},{word:'BEAR',emoji:'🐻'},{word:'DUCK',emoji:'🦆'}],[{word:'CAKE',emoji:'🎂'},{word:'STAR',emoji:'⭐'},{word:'RAIN',emoji:'🌧️'},{word:'TREE',emoji:'🌳'},{word:'FROG',emoji:'🐸'}]];
+  const medWords=[[{word:'APPLE',emoji:'🍎'},{word:'GRAPE',emoji:'🍇'},{word:'MANGO',emoji:'🥭'},{word:'LEMON',emoji:'🍋'},{word:'MELON',emoji:'🍈'}],[{word:'CLOUD',emoji:'☁️'},{word:'STORM',emoji:'⛈️'},{word:'FROST',emoji:'🌨️'},{word:'SUNNY',emoji:'☀️'},{word:'WINDY',emoji:'💨'}]];
+  const trickWords=[[{word:'PENGUIN',emoji:'🐧'},{word:'DOLPHIN',emoji:'🐬'},{word:'LANTERN',emoji:'🏮'},{word:'BLANKET',emoji:'🛋️'},{word:'CAPTAIN',emoji:'⚓'}],[{word:'THUNDER',emoji:'⚡'},{word:'CRYSTAL',emoji:'💎'},{word:'JOURNEY',emoji:'🗺️'},{word:'MYSTERY',emoji:'🔍'},{word:'VOLCANO',emoji:'🌋'}]];
+  const pool=diff==='easy'?easyWords:diff==='medium'?medWords:trickWords;
+  const selected=pick(pool);
+  function scrambleWord(word){const letters=word.split('');let s,attempts=0;do{s=shuffle(letters).join('');attempts++;}while(s===word&&attempts<20);return s;}
+  const bonusPool=diff==='easy'?[{word:'ELEPHANT',emoji:'🐘'},{word:'RAINBOW',emoji:'🌈'}]:diff==='medium'?[{word:'GIRAFFE',emoji:'🦒'},{word:'LIBRARY',emoji:'📚'}]:[{word:'CHOCOLATE',emoji:'🍫'},{word:'TELESCOPE',emoji:'🔭'}];
+  const bonus=pick(bonusPool);
+  const items=selected.map(({word,emoji})=>{const scrambled=scrambleWord(word);return `<div class="scramble-item"><div class="scramble-emoji">${emoji}</div><div><div style="margin-bottom:6px;display:flex;align-items:center;gap:10px"><div class="scramble-letters">${scrambled.split('').map(l=>`<div class="scramble-letter">${l}</div>`).join('')}</div><span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:#ccc">→</span><div class="scramble-answer">${word.split('').map(()=>`<div class="scramble-blank"></div>`).join('')}</div></div></div></div>`;}).join('');
+  return `<p class="ws-tip">The letters are jumbled up — unscramble them to spell the word!</p>${randomPrompt()}
+    <div class="ws-section">Unscramble the letters</div>${items}
+    <div class="ws-section" style="margin-top:14px">Bonus challenge 🏆</div>
+    <div class="scramble-item"><div class="scramble-emoji">${bonus.emoji}</div><div><div style="margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap"><div class="scramble-letters">${scrambleWord(bonus.word).split('').map(l=>`<div class="scramble-letter">${l}</div>`).join('')}</div><span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:#ccc">→</span><div class="scramble-answer">${bonus.word.split('').map(()=>`<div class="scramble-blank"></div>`).join('')}</div></div></div></div>`;
+}
+
+// ── 15. Maths Stories ─────────────────────────────────────────────────────────
+function genMathsStory(){
+  const diff=difficulty();
+  const name=childName()||pick(['Sam','Mia','Liam','Zoe','Jack','Ella']);
+  const templates=shuffle([
+    ()=>{const a=diff==='easy'?pick([2,3,4]):diff==='medium'?2+Math.floor(Math.random()*8):8+Math.floor(Math.random()*20),b=diff==='easy'?pick([1,2,3]):diff==='medium'?1+Math.floor(Math.random()*8):5+Math.floor(Math.random()*15),animals=pick(['birds','frogs','ducks','rabbits','butterflies']),place=pick(['in the tree','on the fence','by the pond','in the garden']);return{text:`There were ${a} ${animals} sitting ${place}. Then ${b} more joined them. How many ${animals} altogether?`,op:`${a} + ${b} = `};},
+    ()=>{const total=diff==='easy'?pick([5,6,7,8]):diff==='medium'?5+Math.floor(Math.random()*10):15+Math.floor(Math.random()*20),gone=diff==='easy'?pick([1,2,3]):1+Math.floor(Math.random()*(total-1)),items=pick(['apples','stars','shells','stickers','flowers']),action=pick(['fell off the tree','were eaten','blew away','were given away','got lost']);return{text:`${name} had ${total} ${items}. ${gone} ${action}. How many ${items} are left?`,op:`${total} − ${gone} = `};},
+    ()=>{const groups=diff==='easy'?pick([2,3]):2+Math.floor(Math.random()*4),each=diff==='easy'?pick([2,3,4]):2+Math.floor(Math.random()*5),thing=pick(['legs on each spider','wheels on each car','spots on each butterfly','fish in each tank']),objects=pick(['spiders','cars','butterflies','tanks']);return{text:`There are ${groups} ${objects}. Each one has ${each} ${thing}. How many in total?`,op:`${groups} × ${each} = `};},
+    ()=>{const share=diff==='easy'?pick([2,3]):pick([2,4,5]),base=diff==='easy'?pick([6,8,9,10]):pick([10,12,15,16,20]),adj=base-(base%share)||base,thing=pick(['cookies','marbles','stickers','lollies']),friends=pick(['friends','children','students']);return{text:`${adj} ${thing} shared equally between ${share} ${friends}. How many each?`,op:`${adj} ÷ ${share} = `};},
+    ()=>{const start=diff==='easy'?pick([5,10,15,20]):8+Math.floor(Math.random()*40),add=diff==='easy'?pick([5,10,15]):5+Math.floor(Math.random()*30),thing=pick(['pages read','kilometres walked','stickers collected','minutes of music']);return{text:`${name} had already done ${start} ${thing}. Then did ${add} more. How much altogether?`,op:`${start} + ${add} = `};},
+  ]);
+  const problems=templates.slice(0,4).map((fn,i)=>{const{text,op}=fn();return `<div class="story-problem"><div class="story-text">${i+1}. ${text}</div><div class="story-work-box"><span class="story-answer-label">${op}</span><div class="story-answer-line"></div></div></div>`;}).join('');
+  return `<p class="ws-tip">Read each problem carefully. You can draw, count, or calculate in the box.</p>${randomPrompt()}${problems}`;
+}
+
+// ── 16. Daily Sheet ───────────────────────────────────────────────────────────
+function genDailySheet(){
+  const tracingActivities=[genTraceLetters,genTraceNumbers];
+  const mathsActivities=[genMathsStory,genMatchNumbers];
+  const creativeActivities=[genSquiggle,genFinishCreature,genComicStrip,genFinishPattern,genEmotionFaces];
+  const tracing=pick(tracingActivities);
+  const maths=pick(mathsActivities);
+  const creative=pick(creativeActivities);
+  const tracingLabel=tracing===genTraceLetters?'Letter Tracing':'Number Practice';
+  const mathsLabel=maths===genMathsStory?'Maths Stories':'Number Match-Up';
+  const creativeLabel=['Squiggle Time','Finish the Creature','Make a Comic','Pattern Play','Draw the Feelings'][creativeActivities.indexOf(creative)];
+  return `
+    <div class="daily-section">
+      <div class="daily-section-label">✏️ Warm-Up — ${tracingLabel}</div>
+      ${tracing()}
+    </div>
+    <div class="daily-section">
+      <div class="daily-section-label">🧮 Maths — ${mathsLabel}</div>
+      ${maths()}
+    </div>
+    <div class="daily-section">
+      <div class="daily-section-label">🎨 Creative — ${creativeLabel}</div>
+      ${creative()}
+    </div>`;
+}
+
+// ── Controller ────────────────────────────────────────────────────────────────
+const ACTIVITIES = [
+  { name: 'Warm-Up Lines',       emoji: '✏️',  fn: genPenGrip },
+  { name: 'Letter Tracing',      emoji: '🔤', fn: genTraceLetters },
+  { name: 'Number Practice',     emoji: '🔢', fn: genTraceNumbers },
+  { name: 'Number Match-Up',     emoji: '🎯', fn: genMatchNumbers },
+  { name: 'Pattern Play',        emoji: '🔷', fn: genFinishPattern },
+  { name: 'Draw the Feelings',   emoji: '😊', fn: genEmotionFaces },
+  { name: 'Colour Code',         emoji: '🎨', fn: genColourBySymbol },
+  { name: 'Squiggle Time',       emoji: '〰️', fn: genSquiggle },
+  { name: 'Maze Missions',       emoji: '🌀', fn: genMaze },
+  { name: 'Make a Map',          emoji: '🗺️', fn: genMapMaker },
+  { name: 'Finish the Creature', emoji: '🦎', fn: genFinishCreature },
+  { name: 'Make a Comic',        emoji: '🎬', fn: genComicStrip },
+  { name: 'Story Starter Dice',  emoji: '🎲', fn: genStoryDice },
+  { name: 'Word Mix-Up',         emoji: '🔀', fn: genWordScramble },
+  { name: 'Maths Stories',       emoji: '🧮', fn: genMathsStory },
+  { name: 'Daily Sheet',         emoji: '🗓️', fn: genDailySheet },
+];
+
+let current = 0;
+
+function selectActivity(idx) {
+  current = idx;
+  document.querySelectorAll('.sidebar-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  generate();
+}
+
+function surpriseMe() {
+  const creativeOnes = [7,8,9,10,11,12]; // bias toward creative
+  const all = range(ACTIVITIES.length - 1); // exclude daily sheet
+  const pool = [...creativeOnes, ...all]; // weight creative higher
+  const idx = pick(pool);
+  selectActivity(idx);
+}
+
+function generate() {
+  const { name, emoji, fn } = ACTIVITIES[current];
+  const isDailySheet = current === 15;
+  if (isDailySheet) {
+    document.getElementById('worksheet').innerHTML = wsHeader('Daily Sheet', '🗓️') + fn();
+  } else {
+    document.getElementById('worksheet').innerHTML = wsHeader(name, emoji) + fn();
+  }
+}
+
+generate();
+</script>
+</body>
+</html>
