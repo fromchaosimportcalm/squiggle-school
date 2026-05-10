@@ -3,286 +3,535 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Squiggle School — Printable fun for curious kids</title>
+<title>Squiggle School 〰️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
+
 :root {
-  --cream:        #f8f5ef;
-  --cream-warm:   #f2ece0;
-  --cream-deep:   #e8e0d0;
-  --forest:       #2d4a3e;
-  --forest-mid:   #3a5c4f;
-  --forest-light: #4e7a6a;
-  --accent:       #E9A857;
-  --accent-dark:  #c8883a;
-  --accent-pale:  #fdf0dc;
-  --ink:          #2E3A4A;
-  --ink-soft:     #4a5568;
-  --ink-mute:     #718096;
+  --sun:       #ffcc02;
+  --sun-deep:  #e8a000;
+  --sun-pale:  #fff8e1;
+  --sun-warm:  #fff3bf;
+  --sky:       #e8f4fd;
+  --ink:       #1a1a1a;
+  --ink-soft:  #444;
+  --ink-mute:  #888;
+  --white:     #ffffff;
+  --paper:     #fffdf8;
+  --border:    #e8e0d0;
+
+  /* Activity colours — rainbow spectrum */
+  --c0:  #ff6b6b; --c0d: #e03030;
+  --c1:  #ff922b; --c1d: #d06010;
+  --c2:  #ffd43b; --c2d: #c8a000;
+  --c3:  #69db7c; --c3d: #2f9e44;
+  --c4:  #38d9a9; --c4d: #0ca678;
+  --c5:  #74c0fc; --c5d: #1971c2;
+  --c6:  #9775fa; --c6d: #6741d9;
+  --c7:  #f783ac; --c7d: #c2255c;
+  --c8:  #ff6b6b; --c8d: #e03030;
+  --c9:  #ff922b; --c9d: #d06010;
+  --c10: #69db7c; --c10d:#2f9e44;
+  --c11: #38d9a9; --c11d:#0ca678;
+  --c12: #74c0fc; --c12d:#1971c2;
+  --c13: #9775fa; --c13d:#6741d9;
+  --c14: #f783ac; --c14d:#c2255c;
+  --c15: #ff922b; --c15d:#d06010;
+
+  --font-display: 'Nunito', sans-serif;
   --font-body:    'Crimson Pro', Georgia, serif;
-  --font-mono:    'DM Mono', monospace;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-hand:    'Patrick Hand', cursive;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-body); background: var(--cream); color: var(--ink); min-height: 100vh; font-size: 17px; }
 
-/* ── Header ─────────────────────────────────────────────────────────────────── */
-.app-header {
-  background: var(--forest);
-  color: #fff;
-  padding: 1rem 2rem;
+body {
+  font-family: var(--font-body);
+  background: var(--sky);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 17px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────────── */
+.header {
+  background: var(--sun-pale);
+  border-bottom: 4px solid var(--sun);
+  padding: 0;
+  position: relative;
+}
+
+.header-inner {
+  padding: 1rem 1.8rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  border-bottom: 3px solid var(--accent);
 }
-.header-brand { display: flex; flex-direction: column; gap: 2px; }
-.app-title {
+
+.brand-wrap { display: flex; flex-direction: column; gap: 1px; }
+
+.brand-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
-.app-title em { color: var(--accent); font-style: italic; }
-.app-subtitle { font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.65); }
-.header-controls { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.name-input-wrap { display: flex; align-items: center; gap: 6px; }
-.name-input-wrap label { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
-.name-input {
-  font-family: var(--font-body); font-size: 0.95rem;
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 6px; color: #fff; padding: 5px 10px; width: 140px;
+.brand-title .accent { color: var(--sun-deep); }
+
+.brand-sub {
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  color: var(--ink-mute);
+}
+
+/* Rainbow stripe below title */
+.rainbow-stripe {
+  height: 5px;
+  background: linear-gradient(90deg,
+    #ff6b6b 0%, #ff922b 14%, #ffd43b 28%,
+    #69db7c 42%, #74c0fc 57%, #9775fa 71%, #f783ac 85%, #ff6b6b 100%);
+  margin-top: 6px;
+  border-radius: 3px;
+  width: 220px;
+}
+
+.header-controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ctrl-group { display: flex; flex-direction: column; gap: 3px; }
+.ctrl-label {
+  font-family: var(--font-hand);
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.ctrl-input, .ctrl-select {
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--ink);
+  padding: 5px 10px;
   outline: none;
+  transition: border-color 0.15s;
 }
-.name-input::placeholder { color: rgba(255,255,255,0.3); }
-.name-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.15); }
-.diff-wrap { display: flex; align-items: center; gap: 6px; }
-.diff-wrap label { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
-.diff-select {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 6px; color: #fff; padding: 5px 8px; cursor: pointer; outline: none;
-}
-.diff-select option { background: var(--forest); }
+.ctrl-input { width: 140px; }
+.ctrl-input:focus, .ctrl-select:focus { border-color: var(--sun-deep); }
+.ctrl-input::placeholder { color: #bbb; }
 
 /* ── Layout ──────────────────────────────────────────────────────────────────── */
-.app-body { display: flex; gap: 1.5rem; padding: 1.5rem 2rem; align-items: flex-start; max-width: 1120px; margin: 0 auto; }
+.app-body {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - 110px);
+}
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────────── */
-.sidebar { width: 195px; flex-shrink: 0; position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 3px; }
-.sidebar-label {
-  font-family: var(--font-mono); font-size: 0.55rem; color: var(--ink-mute);
-  letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 0.6rem 0.5rem 0.15rem; opacity: 0.6;
+.sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  background: var(--sun-pale);
+  border-right: 3px solid var(--sun);
+  padding: 1.2rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 110px);
+  overflow-y: auto;
 }
-.sidebar-btn {
-  font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-soft);
-  background: white; border: 1px solid var(--cream-deep); border-radius: 7px;
-  padding: 0.5rem 0.75rem; cursor: pointer; text-align: left;
-  transition: background 0.12s, border-color 0.12s, color 0.12s;
-  line-height: 1.3;
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.age-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--sun-deep);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 4px 2px;
 }
-.sidebar-btn:hover { background: var(--cream-warm); border-color: var(--accent); }
-.sidebar-btn.active { background: var(--accent); color: #fff; border-color: var(--accent-dark); font-weight: 500; }
+.age-label:first-child { padding-top: 2px; }
+
+.act-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink-soft);
+  transition: transform 0.08s, border-color 0.12s, background 0.12s, color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1.2;
+}
+.act-btn:hover {
+  border-color: var(--hover-c, #ccc);
+  background: var(--hover-bg, #fafafa);
+  transform: translateX(2px);
+}
+.act-btn.active {
+  background: var(--active-c, #ff6b6b);
+  border-color: var(--active-c, #ff6b6b);
+  color: white;
+  transform: translateX(3px);
+}
+
+/* Per-button colour vars */
+.act-btn:nth-child(2)  { --hover-c:var(--c0);  --hover-bg:#fff5f5; --active-c:var(--c0); }
+.act-btn:nth-child(3)  { --hover-c:var(--c1);  --hover-bg:#fff8f0; --active-c:var(--c1); }
+.act-btn:nth-child(4)  { --hover-c:var(--c2);  --hover-bg:#fffde0; --active-c:var(--c2); }
+.act-btn:nth-child(5)  { --hover-c:var(--c3);  --hover-bg:#f0fff4; --active-c:var(--c3); }
+.act-btn:nth-child(6)  { --hover-c:var(--c4);  --hover-bg:#f0fffe; --active-c:var(--c4); }
+.act-btn:nth-child(7)  { --hover-c:var(--c5);  --hover-bg:#f0f8ff; --active-c:var(--c5); }
+.act-btn:nth-child(8)  { --hover-c:var(--c6);  --hover-bg:#f8f0ff; --active-c:var(--c6); }
+.act-btn:nth-child(9)  { --hover-c:var(--c7);  --hover-bg:#fff0f6; --active-c:var(--c7); }
+.act-btn:nth-child(11) { --hover-c:var(--c8);  --hover-bg:#fff5f5; --active-c:var(--c8); }
+.act-btn:nth-child(12) { --hover-c:var(--c9);  --hover-bg:#fff8f0; --active-c:var(--c9); }
+.act-btn:nth-child(13) { --hover-c:var(--c10); --hover-bg:#f0fff4; --active-c:var(--c10); }
+.act-btn:nth-child(14) { --hover-c:var(--c11); --hover-bg:#f0fffe; --active-c:var(--c11); }
+.act-btn:nth-child(15) { --hover-c:var(--c12); --hover-bg:#f0f8ff; --active-c:var(--c12); }
+.act-btn:nth-child(16) { --hover-c:var(--c13); --hover-bg:#f8f0ff; --active-c:var(--c13); }
+.act-btn:nth-child(17) { --hover-c:var(--c14); --hover-bg:#fff0f6; --active-c:var(--c14); }
+.act-btn:nth-child(19) { --hover-c:var(--c15); --hover-bg:#fff8f0; --active-c:var(--c15); }
 
 /* ── Main ────────────────────────────────────────────────────────────────────── */
-.main { flex: 1; min-width: 0; }
+.main {
+  flex: 1;
+  padding: 1.4rem 1.8rem;
+  min-width: 0;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────────── */
 .toolbar {
-  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
 }
-.btn {
-  font-family: var(--font-body); font-size: 1rem; padding: 0.5rem 1.1rem;
-  border-radius: 8px; border: 1.5px solid var(--cream-deep); cursor: pointer;
-  transition: background 0.12s, transform 0.08s;
+
+.tool-btn {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.08s, filter 0.08s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-.btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent-dark); }
-.btn-primary:hover { background: var(--accent-dark); }
-.btn-secondary { background: white; color: var(--ink-soft); }
-.btn-secondary:hover { background: var(--cream-warm); border-color: var(--accent); }
-.btn-ghost { background: transparent; color: var(--ink-mute); border-color: var(--cream-deep); font-size: 0.9rem; }
-.btn-ghost:hover { background: var(--cream-warm); color: var(--ink-soft); }
-.toolbar-sep { width: 1px; height: 28px; background: var(--cream-deep); margin: 0 2px; }
+.tool-btn:hover  { transform: translateY(-2px); filter: brightness(1.06); }
+.tool-btn:active { transform: translateY(1px); box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+
+.tool-btn-new      { background: linear-gradient(135deg, #69db7c, #2f9e44); }
+.tool-btn-surprise { background: linear-gradient(135deg, #9775fa, #6741d9); }
+.tool-btn-print    {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--ink-mute);
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+.tool-btn-print:hover { background: white; border-color: #ccc; color: var(--ink); filter: none; }
 
 /* ── Worksheet ───────────────────────────────────────────────────────────────── */
 .worksheet {
-  background: white; width: 706px; max-width: 100%;
-  min-height: 997px; border: 1px solid var(--cream-deep);
-  border-radius: 4px; padding: 44px 48px;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  background: var(--paper);
+  width: 720px;
+  max-width: 100%;
+  min-height: 980px;
+  border-radius: 16px;
+  padding: 48px 52px;
+  box-shadow: 0 4px 0 var(--sun), 0 6px 24px rgba(0,0,0,0.1), 0 0 0 1px var(--border);
+  position: relative;
 }
 
-/* ── Worksheet internals ─────────────────────────────────────────────────────── */
+/* ── Worksheet header ────────────────────────────────────────────────────────── */
 .ws-header {
-  display: flex; justify-content: space-between; align-items: baseline;
-  border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  position: relative;
 }
-.ws-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--ink); }
-.ws-meta { font-family: var(--font-mono); font-size: 0.55rem; color: #bbb; letter-spacing: 0.06em; }
-.ws-fields { display: flex; gap: 2rem; margin-bottom: 20px; }
-.ws-field { display: flex; align-items: baseline; gap: 0.4rem; flex: 1; }
-.ws-field-label { font-family: var(--font-mono); font-size: 0.6rem; color: #999; letter-spacing: 0.1em; white-space: nowrap; }
-.ws-field-line { flex: 1; border-bottom: 1px solid #ccc; height: 1.4rem; }
+
+/* Rainbow underline */
+.ws-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg,
+    #ff6b6b 0%, #ff922b 14%, #ffd43b 28%,
+    #69db7c 42%, #74c0fc 57%, #9775fa 71%, #f783ac 85%, #ff6b6b 100%);
+}
+
+.ws-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.ws-meta {
+  font-family: var(--font-hand);
+  font-size: 0.62rem;
+  color: #bbb;
+  letter-spacing: 0.04em;
+}
+.ws-fields {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 20px;
+}
+.ws-field { display: flex; align-items: baseline; gap: 0.5rem; flex: 1; }
+.ws-field-label {
+  font-family: var(--font-hand);
+  font-size: 0.75rem;
+  color: #aaa;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.ws-field-line {
+  flex: 1;
+  border-bottom: 1.5px solid #ddd;
+  height: 1.6rem;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+.ws-name-filled {
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  color: var(--ink);
+}
 .ws-section {
-  font-family: var(--font-mono); font-size: 0.62rem; color: #aaa;
-  letter-spacing: 0.08em; text-transform: uppercase; margin: 18px 0 7px;
+  font-family: var(--font-hand);
+  font-size: 0.78rem;
+  color: #aaa;
+  letter-spacing: 0.05em;
+  margin: 16px 0 7px;
 }
 .ws-tip {
-  font-family: var(--font-body); font-size: 0.9rem; color: #bbb;
-  font-style: italic; margin: 5px 0 12px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #999;
+  font-style: italic;
+  margin: 2px 0 8px;
+  line-height: 1.4;
 }
 .ws-prompt {
-  background: var(--accent-pale); border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0; padding: 6px 12px; margin: 0 0 14px;
-  font-family: var(--font-body); font-size: 0.9rem; color: var(--accent-dark);
+  background: var(--sun-warm);
+  border-radius: 10px;
+  padding: 6px 12px;
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7a5800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Tracing */
+/* ── Worksheet components ────────────────────────────────────────────────────── */
 .trace-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
 .trace-char {
-  font-family: Arial, Helvetica, sans-serif; font-size: 58px; font-weight: 700;
+  font-family: Arial, sans-serif;
+  font-size: 58px; font-weight: 700;
   color: transparent; -webkit-text-stroke: 1.5px #ddd;
   display: flex; align-items: center; justify-content: center;
-  width: 72px; height: 72px; border: 1px solid #f0f0f0; border-radius: 4px; line-height: 1;
+  width: 72px; height: 72px;
+  border: 1px solid #f0f0f0; border-radius: 8px; line-height: 1;
+  background: white;
 }
-.write-box { border: 1px solid #e8e8e8; border-radius: 4px; width: 100%; height: 64px; position: relative; }
-.write-box-label { font-family: var(--font-mono); font-size: 0.55rem; color: #ccc; letter-spacing: 0.1em; position: absolute; top: 5px; left: 8px; }
-.number-strip { display: flex; gap: 4px; margin: 6px 0 14px; flex-wrap: wrap; }
+.write-box {
+  border: 1.5px dashed #ddd; border-radius: 10px;
+  width: 100%; height: 64px; position: relative; background: white;
+}
+.write-box-label {
+  font-family: var(--font-hand);
+  font-size: 0.6rem; color: #ccc; letter-spacing: 0.06em;
+  position: absolute; top: 6px; left: 10px;
+}
+.number-strip { display: flex; gap: 5px; margin: 6px 0 14px; flex-wrap: wrap; }
 .strip-cell {
-  width: 42px; height: 42px; border: 1px solid #e0e0e0; border-radius: 4px;
-  font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; color: var(--ink);
+  width: 44px; height: 44px;
+  border: 2px solid #e8e8e8; border-radius: 8px;
+  font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink);
   display: flex; align-items: center; justify-content: center;
+  background: white;
 }
-.strip-blank { border: 1.5px dashed #d8d8d8; }
+.strip-blank { border: 2px dashed #ccc; }
 .count-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .count-emoji-group { display: flex; flex-wrap: wrap; gap: 3px; width: 140px; min-height: 38px; align-items: center; align-content: center; }
-.count-write-box { width: 44px; height: 44px; border: 1.5px dashed #ccc; border-radius: 6px; flex-shrink: 0; }
+.count-write-box { width: 48px; height: 48px; border: 2px dashed #ccc; border-radius: 10px; flex-shrink: 0; background: white; }
 .match-number {
-  font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; color: var(--ink);
-  width: 42px; height: 42px; border: 1px solid #ddd; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ink);
+  width: 44px; height: 44px; border: 2px solid #e8e8e8; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white;
 }
-.match-dot-group { width: 42px; height: 42px; border: 1px solid #ddd; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.pattern-row { display: flex; align-items: center; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
-.pattern-cell { font-size: 26px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #f0f0f0; }
-.pattern-blank { border: 1.5px dashed #ccc; background: #fafafa; font-size: 0; }
-.draw-box { border: 1px solid #e8e8e8; border-radius: 6px; width: 100%; height: 110px; }
-
-/* New components */
-.squiggle-canvas { border: 1.5px dashed #d8d0bc; border-radius: 6px; width: 100%; display: block; background: white; }
-.squiggle-prompt { font-family: var(--font-body); font-size: 1.05rem; color: #bbb; font-style: italic; text-align: center; margin: 6px 0 14px; }
+.match-dot-group { width: 44px; height: 44px; border: 2px solid #e8e8e8; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white; }
+.pattern-row { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.pattern-cell { font-size: 28px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 2px solid #eee; background: white; }
+.pattern-blank { border: 2px dashed #ccc; font-size: 0; }
+.draw-box { border: 2px dashed #ddd; border-radius: 12px; width: 100%; height: 110px; background: white; }
+.squiggle-canvas { border: 2px dashed #ddd; border-radius: 12px; width: 100%; display: block; background: white; }
+.squiggle-prompt { font-family: var(--font-hand); font-size: 1.05rem; color: #aaa; font-style: italic; text-align: center; margin: 6px 0 14px; }
 .dice-row { display: flex; gap: 10px; margin: 8px 0 14px; flex-wrap: wrap; }
-.dice-face { width: 64px; height: 64px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 34px; display: flex; align-items: center; justify-content: center; background: #fafafa; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+.dice-face {
+  width: 64px; height: 64px;
+  border: 2px solid #eee; border-radius: 14px;
+  font-size: 34px; display: flex; align-items: center; justify-content: center;
+  background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
 .face-grid { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
 .face-card { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.face-circle { width: 90px; height: 90px; border-radius: 50%; border: 1.5px solid #ddd; background: white; position: relative; overflow: hidden; }
-.face-label { font-family: var(--font-mono); font-size: 0.6rem; color: #aaa; letter-spacing: 0.1em; text-transform: uppercase; }
+.face-circle { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #eee; background: white; position: relative; overflow: hidden; }
+.face-label { font-family: var(--font-hand); font-size: 0.72rem; color: #aaa; letter-spacing: 0.05em; }
 .cbs-grid { display: flex; flex-wrap: wrap; gap: 3px; margin: 8px 0 14px; }
-.cbs-cell { width: 48px; height: 48px; border: 1px solid #e8e8e8; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: white; }
+.cbs-cell { width: 48px; height: 48px; border: 1.5px solid #eee; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: white; }
 .cbs-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 12px; }
-.cbs-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.7rem; color: #666; }
-.cbs-swatch { width: 18px; height: 18px; border-radius: 3px; border: 1px solid #ddd; }
-.map-canvas { border: 1.5px solid #e0e0e0; border-radius: 6px; display: block; background: #f8f9fb; }
-.creature-canvas { border: 1.5px dashed #d8d0bc; border-radius: 6px; display: block; background: white; }
-.comic-strip { display: flex; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
+.cbs-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-size: 0.8rem; color: #666; }
+.cbs-swatch { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid rgba(0,0,0,0.1); }
+.map-canvas { border: 2px solid #eee; border-radius: 12px; display: block; }
+.creature-canvas { border: 2px dashed #ddd; border-radius: 12px; display: block; background: white; }
+.comic-strip { display: flex; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
 .comic-panel { flex: 1; border-right: 2px solid var(--ink); display: flex; flex-direction: column; }
 .comic-panel:last-child { border-right: none; }
 .comic-draw-area { flex: 1; min-height: 160px; background: white; }
-.comic-caption { border-top: 2px solid var(--ink); padding: 5px 7px; font-family: var(--font-body); font-size: 0.85rem; color: #555; line-height: 1.4; min-height: 40px; background: #fafafa; }
+.comic-caption { border-top: 2px solid var(--ink); padding: 6px 8px; font-family: var(--font-hand); font-size: 0.82rem; color: #555; line-height: 1.4; min-height: 44px; background: #fafafa; }
 .scramble-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.scramble-emoji { font-size: 28px; flex-shrink: 0; }
-.scramble-letters { display: flex; gap: 4px; }
-.scramble-letter { width: 32px; height: 38px; border: 1.5px solid var(--ink); border-radius: 6px; font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; justify-content: center; background: var(--cream); }
-.scramble-answer { display: flex; gap: 4px; }
-.scramble-blank { width: 32px; height: 38px; border-bottom: 2px solid var(--ink); background: transparent; }
-.story-problem { border: 1px solid #e8e8e8; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; background: white; }
-.story-text { font-family: var(--font-body); font-size: 1rem; color: var(--ink); line-height: 1.6; margin-bottom: 10px; }
-.story-work-box { border: 1px dashed #ccc; border-radius: 6px; height: 64px; display: flex; align-items: flex-end; padding: 6px 10px; }
-.story-answer-label { font-family: var(--font-mono); font-size: 0.6rem; color: #bbb; letter-spacing: 0.1em; }
-.story-answer-line { border-bottom: 1.5px solid #ccc; width: 80px; margin-left: 8px; }
-
-/* Daily sheet */
-.daily-section { border: 1px solid var(--cream-deep); border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; }
-.daily-section-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-
-/* Print */
-@media print {
-  .app-header, .sidebar, .toolbar { display: none !important; }
-  .app-body { padding: 0; display: block; }
-  .worksheet { box-shadow: none; border: none; width: 100%; padding: 20px 28px; min-height: auto; }
-  body { background: white; }
+.scramble-emoji { font-size: 30px; flex-shrink: 0; }
+.scramble-letters { display: flex; gap: 5px; }
+.scramble-letter {
+  width: 34px; height: 40px;
+  border: 2px solid var(--ink); border-radius: 10px;
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+  color: var(--ink); display: flex; align-items: center; justify-content: center;
+  background: var(--sun-warm);
 }
+.scramble-answer { display: flex; gap: 5px; }
+.scramble-blank { width: 34px; height: 40px; border-bottom: 2.5px solid var(--ink); background: transparent; }
+.story-problem { border: 2px solid #eee; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; background: white; }
+.story-text { font-family: var(--font-body); font-size: 1.05rem; color: var(--ink); line-height: 1.6; margin-bottom: 10px; }
+.story-work-box { border: 2px dashed #ddd; border-radius: 10px; height: 64px; display: flex; align-items: flex-end; padding: 6px 10px; }
+.story-answer-label { font-family: var(--font-hand); font-size: 0.7rem; color: #bbb; letter-spacing: 0.05em; }
+.story-answer-line { border-bottom: 1.5px solid #ddd; width: 80px; margin-left: 8px; }
+.daily-section { border: 2px solid #eee; border-radius: 14px; padding: 18px 22px; margin-bottom: 20px; background: white; }
+.daily-section-label { font-family: var(--font-display); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #2f9e44; margin-bottom: 12px; }
+
+/* ── Print ───────────────────────────────────────────────────────────────────── */
+@media print {
+  .header, .sidebar, .toolbar { display: none !important; }
+  body { background: white; }
+  .app-body { display: block; }
+  .main { padding: 0; background: white; }
+  .worksheet {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 24px 32px;
+    min-height: auto;
+    background: white;
+  }
+  .ws-header::after { background: #eee; }
+}
+
 @media (max-width: 900px) {
-  .app-body { flex-direction: column; padding: 1rem; }
-  .sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; position: static; gap: 4px; }
-  .sidebar-label { width: 100%; margin-top: 6px; }
-  .worksheet { width: 100%; padding: 24px 20px; }
+  .app-body { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; position: static; border-right: none; border-bottom: 3px solid var(--sun); }
+  .worksheet { width: 100%; padding: 24px 20px; border-radius: 10px; }
   .header-controls { display: none; }
 }
+
 </style>
 </head>
 <body>
 
-<header class="app-header">
-  <div class="header-brand">
-    <div class="app-title">Squiggle <em>School</em></div>
-    <div class="app-subtitle">Printable fun for curious kids</div>
-  </div>
-  <div class="header-controls">
-    <div class="name-input-wrap">
-      <label for="childName">Child's name</label>
-      <input class="name-input" id="childName" type="text" placeholder="e.g. Maddie" oninput="generate()">
+<header class="header">
+  <div class="header-inner">
+    <div class="brand-wrap">
+      <div class="brand-title">〰️ Squiggle <span class="accent">School</span></div>
+      <div class="brand-sub">Printable fun for curious kids</div>
+      <div class="rainbow-stripe"></div>
     </div>
-    <div class="diff-wrap">
-      <label for="difficulty">Level</label>
-      <select class="diff-select" id="difficulty" onchange="generate()">
-        <option value="easy">Easy</option>
-        <option value="medium" selected>Medium</option>
-        <option value="tricky">Tricky</option>
-      </select>
+    <div class="header-controls">
+      <div class="ctrl-group">
+        <div class="ctrl-label">Child's name</div>
+        <input class="ctrl-input" id="childName" type="text" placeholder="e.g. Maddie" oninput="generate()">
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label">Level</div>
+        <select class="ctrl-select" id="difficulty" onchange="generate()">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="tricky">Tricky</option>
+        </select>
+      </div>
     </div>
   </div>
 </header>
 
 <div class="app-body">
+
   <nav class="sidebar">
-    <div class="sidebar-label">Preschool</div>
-    <button class="sidebar-btn active" onclick="selectActivity(0)">✏️ Warm-Up Lines</button>
-    <button class="sidebar-btn" onclick="selectActivity(1)">🔤 Letter Tracing</button>
-    <button class="sidebar-btn" onclick="selectActivity(2)">🔢 Number Practice</button>
-    <button class="sidebar-btn" onclick="selectActivity(3)">🎯 Number Match-Up</button>
-    <button class="sidebar-btn" onclick="selectActivity(4)">🔷 Pattern Play</button>
-    <button class="sidebar-btn" onclick="selectActivity(5)">😊 Draw the Feelings</button>
-    <button class="sidebar-btn" onclick="selectActivity(6)">🎨 Colour Code</button>
-    <button class="sidebar-btn" onclick="selectActivity(7)">〰️ Squiggle Time</button>
-    <div class="sidebar-label" style="margin-top:6px">Primary</div>
-    <button class="sidebar-btn" onclick="selectActivity(8)">🌀 Maze Missions</button>
-    <button class="sidebar-btn" onclick="selectActivity(9)">🗺️ Make a Map</button>
-    <button class="sidebar-btn" onclick="selectActivity(10)">🦎 Finish the Creature</button>
-    <button class="sidebar-btn" onclick="selectActivity(11)">🎬 Make a Comic</button>
-    <button class="sidebar-btn" onclick="selectActivity(12)">🎲 Story Starter Dice</button>
-    <button class="sidebar-btn" onclick="selectActivity(13)">🔀 Word Mix-Up</button>
-    <button class="sidebar-btn" onclick="selectActivity(14)">🧮 Maths Stories</button>
-    <div class="sidebar-label" style="margin-top:6px">Special</div>
-    <button class="sidebar-btn" onclick="selectActivity(15)">🗓️ Daily Sheet</button>
+    <div class="age-label">Preschool</div>
+    <button class="act-btn active" onclick="selectActivity(0)"><span>✏️</span>Warm-Up Lines</button>
+    <button class="act-btn" onclick="selectActivity(1)"><span>🔤</span>Letter Tracing</button>
+    <button class="act-btn" onclick="selectActivity(2)"><span>🔢</span>Number Practice</button>
+    <button class="act-btn" onclick="selectActivity(3)"><span>🎯</span>Number Match-Up</button>
+    <button class="act-btn" onclick="selectActivity(4)"><span>🔷</span>Pattern Play</button>
+    <button class="act-btn" onclick="selectActivity(5)"><span>😊</span>Draw the Feelings</button>
+    <button class="act-btn" onclick="selectActivity(6)"><span>🎨</span>Colour Code</button>
+    <button class="act-btn" onclick="selectActivity(7)"><span>〰️</span>Squiggle Time</button>
+    <div class="age-label">Primary</div>
+    <button class="act-btn" onclick="selectActivity(8)"><span>🌀</span>Maze Missions</button>
+    <button class="act-btn" onclick="selectActivity(9)"><span>🗺️</span>Make a Map</button>
+    <button class="act-btn" onclick="selectActivity(10)"><span>🦎</span>Finish the Creature</button>
+    <button class="act-btn" onclick="selectActivity(11)"><span>🎬</span>Make a Comic</button>
+    <button class="act-btn" onclick="selectActivity(12)"><span>🎲</span>Story Starter Dice</button>
+    <button class="act-btn" onclick="selectActivity(13)"><span>🔀</span>Word Mix-Up</button>
+    <button class="act-btn" onclick="selectActivity(14)"><span>🧮</span>Maths Stories</button>
+    <div class="age-label">Special</div>
+    <button class="act-btn" onclick="selectActivity(15)"><span>🗓️</span>Daily Sheet</button>
   </nav>
 
   <div class="main">
     <div class="toolbar">
-      <button class="btn btn-primary" onclick="generate()">🎲 New Sheet</button>
-      <button class="btn btn-secondary" onclick="surpriseMe()">✨ Surprise Me</button>
-      <div class="toolbar-sep"></div>
-      <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
+      <button class="tool-btn tool-btn-new"      onclick="generate()">🎲 New Sheet</button>
+      <button class="tool-btn tool-btn-surprise"  onclick="surpriseMe()">✨ Surprise Me</button>
+      <button class="tool-btn tool-btn-print"     onclick="window.print()">🖨 Print</button>
     </div>
     <div class="worksheet" id="worksheet"></div>
   </div>
+
 </div>
 
 <script>
+
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function shuffle(arr) {
   const a=[...arr];
@@ -320,11 +569,9 @@ function wsHeader(title, emoji='') {
     <div class="ws-fields">
       <div class="ws-field">
         <span class="ws-field-label">Name</span>
-        <div class="ws-field-line" style="display:flex;align-items:flex-end;padding-bottom:2px">
-          ${nameVal ? `<span style="font-family:'Crimson Pro',Georgia,serif;font-size:1rem;color:#2E3A4A">${nameVal}</span>` : ''}
-        </div>
+        <div class="ws-field-line">${nameVal ? `<span class="ws-name-filled">${nameVal}</span>` : ''}</div>
       </div>
-      <div class="ws-field" style="max-width:180px">
+      <div class="ws-field" style="max-width:200px">
         <span class="ws-field-label">Date</span>
         <div class="ws-field-line"></div>
       </div>
@@ -677,7 +924,7 @@ let current = 0;
 
 function selectActivity(idx) {
   current = idx;
-  document.querySelectorAll('.sidebar-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.act-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
   generate();
 }
 
@@ -700,6 +947,8 @@ function generate() {
 }
 
 generate();
+
+
 </script>
 </body>
 </html>
