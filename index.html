@@ -612,7 +612,7 @@ function genTraceLetters() {
   const upper=shuffle([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']).slice(0,12);
   const lower=shuffle([...'abcdefghijklmnopqrstuvwxyz']).slice(0,12);
   const row=chars=>chars.map(c=>`<div class="trace-char">${c}</div>`).join('');
-  return `<p class="ws-tip">Trace over each letter carefully, then try writing it yourself.</p>${randomPrompt()}
+  return `<p class="ws-tip">Trace inside each letter carefully, then try writing it yourself.</p>${randomPrompt()}
     <div class="ws-section">Uppercase — trace each letter</div>
     <div class="trace-grid">${row(upper)}</div>
     <div class="ws-section">Lowercase — trace each letter</div>
@@ -634,7 +634,7 @@ function genTraceNumbers() {
   const blankRow=range(maxCount).map(()=>`<div class="strip-cell strip-blank"></div>`).join('');
   const countRows=counts.map(n=>{const e=pick(emojis);const group=range(n).map(()=>`<span style="font-size:20px">${e}</span>`).join('');
     return `<div class="count-row"><div class="count-emoji-group">${group}</div><span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#ccc">→</span><div class="count-write-box"></div></div>`;}).join('');
-  return `<p class="ws-tip">Trace the numbers, then count the pictures and write how many.</p>${randomPrompt()}
+  return `<p class="ws-tip">Trace inside the numbers, then count each group of pictures and write how many.</p>${randomPrompt()}
     <div class="ws-section">Trace the numbers</div><div class="trace-grid">${traceRow}</div>
     <div class="ws-section">Write 1 to ${maxCount} — copy the top row</div>
     <div class="number-strip">${seqRow}</div><div class="number-strip">${blankRow}</div>
@@ -707,8 +707,8 @@ function genColourBySymbol(){
     <div class="ws-section">Colour each box using the key</div>
     <div class="cbs-legend">${legend}</div>
     <div class="cbs-grid" style="width:${8*51}px">${cells}</div>
-    <div class="ws-section" style="margin-top:14px">Design your own colour code picture</div>
-    <div class="draw-box" style="height:130px"></div>`;
+    // <div class="ws-section" style="margin-top:14px">Design your own colour code picture</div>
+    // <div class="draw-box" style="height:130px"></div>`;
 }
 
 // ── 8. Squiggle Time ──────────────────────────────────────────────────────────
@@ -830,15 +830,16 @@ function genComicStrip(){
 
 // ── 13. Story Starter Dice ────────────────────────────────────────────────────
 function genStoryDice(){
-  const pool=['🐉','🏰','🌊','🦁','🚀','🌋','🏔️','🦋','🎩','🔮','🐠','🌈','⚡','🦄','🍄','🐺','🌙','🎪','🦅','🌺','🐙','🎸','🗝️','🏹','🐸','🌞','🦊','🌿','⚓','🎭','🌠'];
+  const pool=['🐉','🏰','🌊','🦁','🚀','🌋','🏔️','🦋','🎩','🔮','🐠','🌈','⚡','🦄','🍄','🐺','🌙','🎪','🦅','🌺','🐙','🎸','🗝️','🏹','🐸','🌞','🦊','🌿','⚓','🎭','🌠','🐬','🦖','🧙','🏝️','🌵','🐘','🦋'];
   const rolled=shuffle(pool).slice(0,5);
-  const scenes=['Something strange happened at the beginning…','Then suddenly…','By the end of the story…','The place where it happened…','The most important thing…'];
   const dice=rolled.map(e=>`<div class="dice-face">${e}</div>`).join('');
-  const sceneHints=scenes.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px"><div class="dice-face" style="width:44px;height:44px;font-size:22px;flex-shrink:0">${rolled[i]}</div><div style="flex:1"><div style="font-family:'Crimson Pro',Georgia,serif;font-size:0.9rem;color:#aaa;font-style:italic;margin-bottom:3px">${s}</div><div class="write-box" style="height:38px"></div></div></div>`).join('');
-  return `<p class="ws-tip">Roll your dice — you got these 5! Use all of them to build your story.</p>${randomPrompt()}
-    <div class="ws-section">Your story dice</div><div class="dice-row">${dice}</div>
-    <div class="ws-section">Draw your story scene</div><div class="draw-box" style="height:180px;margin-bottom:14px"></div>
-    <div class="ws-section">Write what happened — one idea per die</div>${sceneHints}`;
+  return `<p class="ws-tip">You have 5 story ingredients — use all of them in your picture!</p>${randomPrompt()}
+    <div class="ws-section">Your ingredients</div>
+    <div class="dice-row">${dice}</div>
+    <div class="ws-section">Draw your story scene — try to include all 5 ingredients</div>
+    <div class="draw-box" style="height:340px;margin-bottom:16px"></div>
+    <div class="ws-section">Give your story a title</div>
+    <div class="write-box" style="height:44px"><span class="write-box-label">my story is called…</span></div>`;
 }
 
 // ── 14. Word Mix-Up ───────────────────────────────────────────────────────────
@@ -866,9 +867,9 @@ function genMathsStory(){
   const templates=shuffle([
     ()=>{const a=diff==='easy'?pick([2,3,4]):diff==='medium'?2+Math.floor(Math.random()*8):8+Math.floor(Math.random()*20),b=diff==='easy'?pick([1,2,3]):diff==='medium'?1+Math.floor(Math.random()*8):5+Math.floor(Math.random()*15),animals=pick(['birds','frogs','ducks','rabbits','butterflies']),place=pick(['in the tree','on the fence','by the pond','in the garden']);return{text:`There were ${a} ${animals} sitting ${place}. Then ${b} more joined them. How many ${animals} altogether?`,op:`${a} + ${b} = `};},
     ()=>{const total=diff==='easy'?pick([5,6,7,8]):diff==='medium'?5+Math.floor(Math.random()*10):15+Math.floor(Math.random()*20),gone=diff==='easy'?pick([1,2,3]):1+Math.floor(Math.random()*(total-1)),items=pick(['apples','stars','shells','stickers','flowers']),action=pick(['fell off the tree','were eaten','blew away','were given away','got lost']);return{text:`${name} had ${total} ${items}. ${gone} ${action}. How many ${items} are left?`,op:`${total} − ${gone} = `};},
-    ()=>{const groups=diff==='easy'?pick([2,3]):2+Math.floor(Math.random()*4),each=diff==='easy'?pick([2,3,4]):2+Math.floor(Math.random()*5),thing=pick(['legs on each spider','wheels on each car','spots on each butterfly','fish in each tank']),objects=pick(['spiders','cars','butterflies','tanks']);return{text:`There are ${groups} ${objects}. Each one has ${each} ${thing}. How many in total?`,op:`${groups} × ${each} = `};},
-    ()=>{const share=diff==='easy'?pick([2,3]):pick([2,4,5]),base=diff==='easy'?pick([6,8,9,10]):pick([10,12,15,16,20]),adj=base-(base%share)||base,thing=pick(['cookies','marbles','stickers','lollies']),friends=pick(['friends','children','students']);return{text:`${adj} ${thing} shared equally between ${share} ${friends}. How many each?`,op:`${adj} ÷ ${share} = `};},
-    ()=>{const start=diff==='easy'?pick([5,10,15,20]):8+Math.floor(Math.random()*40),add=diff==='easy'?pick([5,10,15]):5+Math.floor(Math.random()*30),thing=pick(['pages read','kilometres walked','stickers collected','minutes of music']);return{text:`${name} had already done ${start} ${thing}. Then did ${add} more. How much altogether?`,op:`${start} + ${add} = `};},
+    ()=>{const groups=diff==='easy'?pick([2,3]):2+Math.floor(Math.random()*4),each=diff==='easy'?pick([2,3,4]):2+Math.floor(Math.random()*5),thing=pick(['legs on each spider','wheels on each car','spots on each butterfly','fish in each tank']),objects=pick(['spiders','cars','butterflies','tanks']);return{text:`There are ${groups} ${objects}. Each one has ${each} ${thing}. How many altogether?`,op:`${groups} × ${each} = `};},
+    ()=>{const share=diff==='easy'?pick([2,3]):pick([2,4,5]),base=diff==='easy'?pick([6,8,9,10]):pick([10,12,15,16,20]),adj=base-(base%share)||base,thing=pick(['cookies','marbles','stickers','lollies']),friends=pick(['friends','children','students']);return{text:`${name} has ${adj} ${thing} to share equally between ${share} ${friends}. How many does each person get?`,op:`${adj} ÷ ${share} = `};},
+    ()=>{const start=diff==='easy'?pick([5,10,15,20]):8+Math.floor(Math.random()*40),add=diff==='easy'?pick([5,10,15]):5+Math.floor(Math.random()*30),thing=pick(['pages','kilometres','stickers','minutes']),activity=pick(['of reading','of walking','collected','of music']);return{text:`${name} had already done ${start} ${thing} ${activity}. Then ${name.split(' ')[0]} did ${add} more. How many ${thing} altogether?`,op:`${start} + ${add} = `};},
   ]);
   const problems=templates.slice(0,4).map((fn,i)=>{const{text,op}=fn();return `<div class="story-problem"><div class="story-text">${i+1}. ${text}</div><div class="story-work-box"><span class="story-answer-label">${op}</span><div class="story-answer-line"></div></div></div>`;}).join('');
   return `<p class="ws-tip">Read each problem carefully. You can draw, count, or calculate in the box.</p>${randomPrompt()}${problems}`;
