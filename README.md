@@ -29,31 +29,34 @@ That's it.
 ## What's included
 
 ### Preschool
-| Activity | What they do |
-|---|---|
-| ✏️ Warm-Up Lines | Trace guided strokes — waves, spirals, zigzags |
-| 🔤 Letter Tracing | Trace uppercase and lowercase letters |
-| 🔢 Number Practice | Trace numbers and count groups |
-| 🎯 Number Match-Up | Match numbers to dot groups |
-| 🔷 Pattern Play | Continue repeating patterns, then make their own |
-| 😊 Draw the Feelings | Draw expressions on blank faces |
-| 🎨 Colour Code | Colour by symbol (no reading needed) |
-| 〰️ Squiggle Time | Random squiggles to finish into a picture |
+
+| Activity             | What they do                                     |
+| -------------------- | ------------------------------------------------ |
+| ✏️ Warm-Up Lines     | Trace guided strokes — waves, spirals, zigzags   |
+| 🔤 Letter Tracing    | Trace uppercase and lowercase letters            |
+| 🔢 Number Practice   | Trace numbers and count groups                   |
+| 🎯 Number Match-Up   | Match numbers to dot groups                      |
+| 🔷 Pattern Play      | Continue repeating patterns, then make their own |
+| 😊 Draw the Feelings | Draw expressions on blank faces                  |
+| 🎨 Colour Code       | Colour by symbol (no reading needed)             |
+| 〰️ Squiggle Time     | Random squiggles to finish into a picture        |
 
 ### Primary
-| Activity | What they do |
-|---|---|
-| 🌀 Maze Missions | Navigate a randomly generated maze |
-| 🗺️ Make a Map | Complete a randomly generated island map |
-| 🦎 Finish the Creature | Copy the left half of a creature onto the right |
-| 🎬 Make a Comic | Draw a 4-panel comic from random story prompts |
-| 🎲 Story Starter Dice | Roll 5 emoji dice and build a story |
-| 🔀 Word Mix-Up | Unscramble themed word sets |
-| 🧮 Maths Stories | Randomly generated word problems |
+
+| Activity               | What they do                                                              |
+| ---------------------- | ------------------------------------------------------------------------- |
+| 🌀 Maze Missions       | Navigate a randomly generated maze                                        |
+| 🗺️ Make a Map          | Complete a randomly generated island map                                  |
+| 🦎 Finish the Creature | Copy the left half of a creature onto the right                           |
+| 🎬 Make a Comic        | Draw a 4-panel comic from random story prompts                            |
+| 🎲 Story Starter Dice  | Draw a scene using the pre-rolled story dice, and give your story a title |
+| 🔀 Word Mix-Up         | Unscramble themed word sets                                               |
+| 🧮 Maths Stories       | Randomly generated word problems                                          |
 
 ### Special
-| Activity | What they do |
-|---|---|
+
+| Activity       | What they do                                     |
+| -------------- | ------------------------------------------------ |
 | 🗓️ Daily Sheet | One tracing + one maths + one creative, combined |
 
 ---
@@ -89,4 +92,4 @@ Pull requests welcome.
 
 ---
 
-*Free to use, share, and adapt. If you find it useful, tell another parent.*
+_Free to use, share, and adapt. If you find it useful, tell another parent._
